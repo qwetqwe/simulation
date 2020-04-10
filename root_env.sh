@@ -1,0 +1,3 @@
+export LD_LIBRARY_PATH=/usr/local/cuda/lib64:/usr/local/lib:/usr/local/apollo/paddlepaddle_dep/mkldnn/lib/:/usr/local/apollo/boost/lib:/usr/local/apollo/libtorch_gpu/lib:/usr/local/fast-rtps/lib:/usr/local/Qt5.5.1/5.5/gcc_64/lib:/usr/local/adolc/lib64:/usr/local/Qt5.5.1/5.5/gcc_64/lib:/usr/lib:/usr/lib/x86_64-linux-gnu:/apollo/lib:/apollo/bazel-genfiles/external/caffe/lib:/apollo/lib:/usr/local/apollo/local_integ/lib
+export PYTHONPATH=/apollo/modules/teleop/common:/usr/local/lib/python2.7/dist-packages:/apollo/py_proto:/apollo/modules/tools:/apollo/bazel-bin/cyber/py_wrapper:/apollo/cyber/python:/apollo/bazel-bin/cyber/py_wrapper:/apollo/cyber/python:
+

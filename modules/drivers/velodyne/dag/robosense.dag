@@ -1,0 +1,14 @@
+# Define all coms in DAG streaming.
+module_config {
+    module_library : "/apollo/bazel-bin/modules/drivers/velodyne/driver/libvelodyne_driver_component.so"
+
+    components {
+      class_name : "VelodyneDriverComponent"
+      config {
+        name : "velodyne_driver"
+      # config_file_path : "/apollo/modules/drivers/velodyne/conf/robosense32_conf.pb.txt"
+         config_file_path : "/apollo/modules/drivers/velodyne/conf/robosense16_left_conf.pb.txt"
+      }
+    }
+}
+

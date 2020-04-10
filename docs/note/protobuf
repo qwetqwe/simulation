@@ -1,0 +1,2 @@
+bytes
+对于protobuf的bytes类型，对应于c++的string类型，可以通过set_xxx(string)来赋值字符串，也可以通过set_xxx（char*,int size）,赋值字符数组，通过限制size固定赋值长度，避免\0字符导致赋值终止

@@ -1,0 +1,13 @@
+frame_id: "Robosense16"
+convert_channel_name: "/apollo/sensor/Robosense16_left/PointCloud2"
+scan_channel: "/apollo/sensor/Robosense16/scan"
+rpm: 600.0
+model: RS16
+mode: STRONGEST
+max_range: 200.0
+min_range: 0.0
+max_angle: 360
+min_angle: 0
+dev_ip: "192.168.1.190"
+msop_port: 6690
+difop_port: 7780

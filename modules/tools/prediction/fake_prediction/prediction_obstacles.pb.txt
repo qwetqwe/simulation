@@ -1,0 +1,32 @@
+header {
+  timestamp_sec: 1505249215.0987027
+  module_name: "prediction"
+  sequence_num: 6687
+}
+prediction_obstacle {
+  perception_obstacle {
+    id: 867
+    position {
+      x: 587025.313126084
+      y: 4141487.463220146
+      z: -31.235117309
+    }
+    theta: -2.309548453831634
+    velocity {
+      x: -1.2112696170806885
+      y: -1.3298907279968262
+      z: 0
+    }
+    length: 4.5249109268188477
+    width: 2.0198359489440918
+    height: 2.068533182144165
+    tracking_time: 125.8430700302124
+    type: UNKNOWN
+    timestamp: 0
+  }
+  timestamp: 1505249215.0977759
+  predicted_period: 3
+
+ 
+}
+perception_error_code: OK

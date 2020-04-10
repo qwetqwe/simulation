@@ -1,0 +1,1 @@
+/apollo/bazel-bin/modules/perception/camera/tools/offline/offline_obstacle_pipeline --test_list /apollo/apollo_rosbag//apollo_rosbag_camera_6mm_front/file_list.txt --image_root apollo/apollo_rosbag//apollo_rosbag_camera_6mm_front --sensor_name front_6mm --camera_fps 20 

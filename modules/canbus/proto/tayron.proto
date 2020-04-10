@@ -1,0 +1,186 @@
+syntax = "proto2";
+
+package apollo.canbus;
+
+message Gas_cmd_216 {
+// Control Message
+  enum Gas_control_cmdType {
+    GAS_CONTROL_CMD_INVALID = 0;
+    GAS_CONTROL_CMD_INTELLIGENCE = 1;
+    GAS_CONTROL_CMD_MANUAL = 2;
+    GAS_CONTROL_CMD_RESERVED = 3;
+  }
+  // [%] [0|99.45]
+  optional double gas_pedal_cmd = 1;
+  // [] [0|3]
+  optional Gas_control_cmdType gas_control_cmd = 2;
+}
+
+message Shift_cmd_217 {
+// Control Message
+  enum Shift_gear_position_cmdType {
+    SHIFT_GEAR_POSITION_CMD_NONE = 0;
+    SHIFT_GEAR_POSITION_CMD_P = 1;
+    SHIFT_GEAR_POSITION_CMD_R = 2;
+    SHIFT_GEAR_POSITION_CMD_N = 3;
+    SHIFT_GEAR_POSITION_CMD_D = 4;
+  }
+  enum Shift_control_cmdType {
+    SHIFT_CONTROL_CMD_INVALID = 0;
+    SHIFT_CONTROL_CMD_INTELLIGENCE = 1;
+    SHIFT_CONTROL_CMD_MANUAL = 2;
+    SHIFT_CONTROL_CMD_MANUALINTERVENERECOVERY = 3;
+  }
+  // [] [0|7]
+  optional Shift_gear_position_cmdType shift_gear_position_cmd = 1;
+  // [] [0|3]
+  optional Shift_control_cmdType shift_control_cmd = 2;
+}
+
+message Brake_cmd_214 {
+// Control Message
+  enum Brake_control_cmdType {
+    BRAKE_CONTROL_CMD_INVALID = 0;
+    BRAKE_CONTROL_CMD_INTELLIGENCE = 1;
+    BRAKE_CONTROL_CMD_MANUAL = 2;
+    BRAKE_CONTROL_CMD_INTERVENERECOVERY = 3;
+  }
+  // [] [0|100]
+  optional double brake_pedal_cmd = 1;
+  // [] [0|3]
+  optional Brake_control_cmdType brake_control_cmd = 2;
+}
+
+message Steering_cmd_215 {
+// Control Message
+  enum Steering_control_cmdType {
+    STEERING_CONTROL_CMD_STANDBYMODEORDER = 0;
+    STEERING_CONTROL_CMD_AUTOSTEERINGMODEORDER = 1;
+    STEERING_CONTROL_CMD_EPSMODEORDER = 4;
+    STEERING_CONTROL_CMD_INTERVENTRECOVERORDER = 5;
+    STEERING_CONTROL_CMD_CLEARFAULTORDER = 6;
+  }
+  enum Steering_angle_valid_cmdType {
+    STEERING_ANGLE_VALID_CMD_INVALID = 0;
+    STEERING_ANGLE_VALID_CMD_VALID = 1;
+  }
+  enum Steering_lka_en_cmdType {
+    STEERING_LKA_EN_CMD_LKAUNABLE = 0;
+    STEERING_LKA_EN_CMD_LKAENABLE = 1;
+  }
+  enum Steering_dcu_vcu_stateType {
+    STEERING_DCU_VCU_STATE_INVALID = 0;
+    STEERING_DCU_VCU_STATE_VALID = 1;
+  }
+  // [deg] [-870|870]
+  optional double steering_angle_cmd = 1;
+  // [] [0|15]
+  optional Steering_control_cmdType steering_control_cmd = 2;
+  // [] [0|1016]
+  optional double steering_v_angle_cmd = 3;
+  // [] [0|1]
+  optional Steering_angle_valid_cmdType steering_angle_valid_cmd = 4;
+  // [] [0|1]
+  optional Steering_lka_en_cmdType steering_lka_en_cmd = 5;
+  // [Nm] [-12.8|12.7]
+  optional double steering_lka_overlay_tq_cmd = 6;
+  // [] [0|15]
+  optional int32 steering_control_counter_cmd = 7;
+  // [] [0|1]
+  optional Steering_dcu_vcu_stateType steering_dcu_vcu_state = 8;
+}
+
+message Wheel_speed_4a0 {
+// Report Message
+  // [Unit KiloMeterPerHour] [0|326.39]
+  optional double br3_rad_kmh_vr = 1;
+  // [Unit KiloMeterPerHour] [0|326.39]
+  optional double br3_rad_kmh_vl = 2;
+  // [Unit KiloMeterPerHour] [0|326.39]
+  optional double br3_rad_kmh_hr = 3;
+  // [Unit KiloMeterPerHour] [0|326.39]
+  optional double br3_rad_kmh_hl = 4;
+  // [] [0|1]
+  optional bool br3_fahtr_vl = 5;
+  // [] [0|1]
+  optional bool br3_fahrtr_vr = 6;
+  // [] [0|1]
+  optional bool br3_fahrtr_hr = 7;
+  // [] [0|1]
+  optional bool br3_fahrtr_hl = 8;
+}
+
+message Steering_report_322 {
+// Report Message
+  // [deg] [-870|870]
+  optional double steering_angle_status = 1;
+  // [] [0|15]
+  optional int32 steering_control_status = 2;
+  // [Nm] [-15|15.6]
+  optional double steering_toque_status = 3;
+  // [] [0|1016]
+  optional double steering_v_angle_status = 4;
+  // [] [0|15]
+  optional int32 steering_counter_status = 5;
+  // [A] [-160|167.6]
+  optional double steering_real_current_status = 6;
+  // [A] [-160|167.6]
+  optional double steering_ref_current_status = 7;
+}
+
+message Gas_report_323 {
+// Report Message
+  // [] [0|3]
+  optional int32 gas_control_status = 1;
+  // [] [0|99.45]
+  optional double gas_pedal_status = 2;
+  // [] [0|99.45]
+  optional double gas_pedal_out_status = 3;
+  // [] [0|3]
+  optional int32 gas_fehler_status = 4;
+}
+
+message Brake_report_321 {
+// Report Message
+  // [bar] [0|409.5]
+  optional double pu_pressure = 1;
+  // [] [0|0]
+  optional double pedal_travel = 2;
+  // [] [0|3]
+  optional int32 brake_pedal_status = 3;
+  // [] [0|3]
+  optional int32 brake_fehler_status = 4;
+  // [] [0|5]
+  optional int32 brake_control_status = 5;
+}
+
+message Shift_report_324 {
+// Report Message
+  // [] [0|15]
+  optional int32 shift_wh_position = 1;
+  // [] [0|15]
+  optional int32 shift_gear_position_status = 2;
+  // [] [0|3]
+  optional int32 shift_fehler_status = 3;
+  // [] [0|3]
+  optional int32 shift_control_status = 4;
+}
+
+message Mmotor_1_280 {
+// Report Message
+  // [] [0|16256]
+  optional double mo1_drehzahl = 1;
+}
+
+message Tayron {
+  optional Gas_cmd_216 gas_cmd_216 = 1; // control message
+  optional Shift_cmd_217 shift_cmd_217 = 2; // control message
+  optional Brake_cmd_214 brake_cmd_214 = 3; // control message
+  optional Steering_cmd_215 steering_cmd_215 = 4; // control message
+  optional Wheel_speed_4a0 wheel_speed_4a0 = 5; // report message
+  optional Steering_report_322 steering_report_322 = 6; // report message
+  optional Gas_report_323 gas_report_323 = 7; // report message
+  optional Brake_report_321 brake_report_321 = 8; // report message
+  optional Shift_report_324 shift_report_324 = 9; // report message
+  optional Mmotor_1_280 mmotor_1_280 = 10; // report message
+}

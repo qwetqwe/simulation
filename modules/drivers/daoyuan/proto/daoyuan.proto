@@ -1,0 +1,31 @@
+syntax = "proto2";
+
+package apollo.drivers.daoyuan;
+
+import "modules/drivers/canbus/proto/can_card_parameter.proto";
+
+message Daoyuan {
+  optional double pitch = 21;
+  optional double roll = 1;
+  optional double yaw = 2;
+  optional double pitch_rate = 3;
+  optional double roll_rate = 4;
+  optional double yaw_rate = 5;
+  optional double acc_right =6;
+  optional double acc_front =7;
+  optional double acc_up = 8;
+  optional double lon = 9;
+  optional double lat = 10;
+  optional double height = 11;
+  optional double north_spd = 12;
+  optional double east_spd = 13;
+  optional double up_spd = 14;
+  optional uint32 ins_status = 15;
+  optional uint32 gps_pos_status = 16;
+  optional uint32 num_sv = 17;
+  optional uint32 gps_heading_status = 18;
+  optional bool car_status = 19;
+  optional double ins_time = 20;
+}
+
+

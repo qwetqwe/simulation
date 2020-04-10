@@ -1,0 +1,11 @@
+module_config {
+    module_library : "/apollo/bazel-bin/modules/drivers/daoyuan/libdaoyuan.so"
+    timer_components {
+        class_name : "DaoyuanCanbusComponent"
+        config {
+            name: "daoyuan"
+            config_file_path:  "/apollo/modules/drivers/daoyuan/conf/daoyuan_conf.pb.txt"
+            interval: 10
+        }
+    }
+}

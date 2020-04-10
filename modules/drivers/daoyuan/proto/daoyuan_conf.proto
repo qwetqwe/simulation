@@ -1,0 +1,17 @@
+syntax = "proto2";
+
+package apollo.drivers.daoyuan;
+
+import "modules/drivers/canbus/proto/can_card_parameter.proto";
+
+message DaoyuanConf {
+  optional apollo.drivers.canbus.CANCardParameter can_card_parameter = 1;
+  optional bool enable_receiver_log = 3 [default = false];
+  optional string localization_topic = 5;
+  optional string localization_status_topic = 6;
+  optional string gps_status_topic = 7;
+  optional string broadcast_tf_frame_id = 8;
+  optional string broadcast_tf_child_frame_id = 9;
+  optional string proj4_text = 10;
+}
+

@@ -1,0 +1,2 @@
+fusion 有两种融合方法，一是概率融合算法ProbabilisticFusion，介绍　//TODO 。二是DummyFusionSystem，可以直接把所有接收到传感器障碍物信息全部加到一起发布，可以用于调试。
+

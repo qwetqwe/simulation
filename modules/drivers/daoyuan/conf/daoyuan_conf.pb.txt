@@ -1,0 +1,12 @@
+  can_card_parameter {
+    brand:HERMES_CAN
+    type: PCI_CARD
+    channel_id: CHANNEL_ID_ZERO
+  }
+  localization_topic: "/apollo/localization/pose"
+  localization_status_topic: "/apollo/localization/msf_status"
+  gps_status_topic: "/apollo/sensor/gnss/ins_stat"
+  broadcast_tf_frame_id: "world"
+  broadcast_tf_child_frame_id: "localization"
+  enable_receiver_log: false
+  proj4_text: "+proj=utm +zone=10 +ellps=WGS84 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs"

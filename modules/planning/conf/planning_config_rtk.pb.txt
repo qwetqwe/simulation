@@ -1,0 +1,3 @@
+rtk_planning_config {
+  planner_type: RTK;
+}
