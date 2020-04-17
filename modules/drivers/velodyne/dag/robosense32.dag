@@ -9,7 +9,6 @@ module_config {
          config_file_path : "/apollo/modules/drivers/velodyne/conf/robosense32_conf.pb.txt"
       }
     }
-
     components {
       class_name : "VelodyneDriverComponent"
       config {
@@ -17,13 +16,7 @@ module_config {
          config_file_path : "/apollo/modules/drivers/velodyne/conf/robosense16_left_conf.pb.txt"
       }
     }
-    
-    components {
-      class_name : "VelodyneDriverComponent"
-      config {
-        name : "robosense16_right_driver"
-         config_file_path : "/apollo/modules/drivers/velodyne/conf/robosense16_right_conf.pb.txt"
-      }
-    }
+
+
 }
 

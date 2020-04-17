@@ -44,12 +44,12 @@ void Shiftcmd217::UpdateData(uint8_t* data) {
 
 void Shiftcmd217::Reset() {
   // TODO(All) :  you should check this manually
-  shift_gear_position_cmd_ = Shift_cmd_217::SHIFT_GEAR_POSITION_CMD_NONE;
+  shift_gear_position_cmd_ = 3;
   shift_control_cmd_ = Shift_cmd_217::SHIFT_CONTROL_CMD_MANUAL;
 }
 
 Shiftcmd217* Shiftcmd217::set_shift_gear_position_cmd(
-    Shift_cmd_217::Shift_gear_position_cmdType shift_gear_position_cmd) {
+    int shift_gear_position_cmd) {
   shift_gear_position_cmd_ = shift_gear_position_cmd;
   return this;
  }
@@ -61,27 +61,27 @@ Shiftcmd217* Shiftcmd217::set_shift_control_cmd(
  }
 
 Shiftcmd217* Shiftcmd217::set_gear_none() {
-  shift_gear_position_cmd_ = Shift_cmd_217::SHIFT_GEAR_POSITION_CMD_NONE;
+  shift_gear_position_cmd_ = 0;
   return this;
 }
 
 Shiftcmd217* Shiftcmd217::set_gear_park() {
-  shift_gear_position_cmd_ = Shift_cmd_217::SHIFT_GEAR_POSITION_CMD_P;
+  shift_gear_position_cmd_ = 1;
   return this;
 }
 
 Shiftcmd217* Shiftcmd217::set_gear_reverse() {
-  shift_gear_position_cmd_ = Shift_cmd_217::SHIFT_GEAR_POSITION_CMD_R;
+  shift_gear_position_cmd_ = 2;
   return this;
 }
 
 Shiftcmd217* Shiftcmd217::set_gear_neutral() {
-  shift_gear_position_cmd_ = Shift_cmd_217::SHIFT_GEAR_POSITION_CMD_N;
+  shift_gear_position_cmd_ = 3;
   return this;
 }
 
 Shiftcmd217* Shiftcmd217::set_gear_drive() {
-  shift_gear_position_cmd_ = Shift_cmd_217::SHIFT_GEAR_POSITION_CMD_D;
+  shift_gear_position_cmd_ = 4;
   return this;
 }
 
@@ -102,7 +102,7 @@ Shiftcmd217* Shiftcmd217::set_driver_override() {
 
 // config detail: {'name': 'shift_gear_position_cmd', 'enum': {0: 'SHIFT_GEAR_POSITION_CMD_N', 1: 'SHIFT_GEAR_POSITION_CMD_D', 2: 'SHIFT_GEAR_POSITION_CMD_R', 3: 'SHIFT_GEAR_POSITION_CMD_P', 4: 'SHIFT_GEAR_POSITION_CMD_NONE'}, 'precision': 1.0, 'len': 4, 'is_signed_var': False, 'offset': 0.0, 'physical_range': '[0|7]', 'bit': 8, 'type': 'enum', 'order': 'intel', 'physical_unit': ''}
 void Shiftcmd217::set_p_shift_gear_position_cmd(uint8_t* data,
-    Shift_cmd_217::Shift_gear_position_cmdType shift_gear_position_cmd) {
+    int shift_gear_position_cmd) {
   int x = shift_gear_position_cmd;
 
   Byte to_set(data + 1);

@@ -71,7 +71,7 @@ Brakecmd214* Brakecmd214::set_driver_override(){
 // config detail: {'name': 'brake_pedal_cmd', 'offset': 0.0, 'precision': 0.005, 'len': 8, 'is_signed_var': False, 'physical_range': '[0|100]', 'bit': 0, 'type': 'double', 'order': 'intel', 'physical_unit': ''}
 void Brakecmd214::set_p_brake_pedal_cmd(uint8_t* data,
     double brake_pedal_cmd) {
-  brake_pedal_cmd = ProtocolData::BoundedValue(0.0, 100.0, brake_pedal_cmd);
+  brake_pedal_cmd = ProtocolData::BoundedValue(0.0, 100.0, brake_pedal_cmd/100.0);
   int x = brake_pedal_cmd / 0.005000;
 
   Byte to_set(data + 0);

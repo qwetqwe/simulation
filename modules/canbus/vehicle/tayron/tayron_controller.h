@@ -125,7 +125,6 @@ class TayronController final : public VehicleController {
 
   Chassis chassis_;
   double brake_percentage_=0; //for calibration
-  uint8_t brake40_for_shift=0;
   std::unique_ptr<std::thread> thread_;
   bool is_chassis_error_ = false;
   double brake_status_=0;

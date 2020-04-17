@@ -120,7 +120,6 @@ ErrorCode VehicleController::Update(const ControlCommand &command) {
         break;
       }
     }
-    AINFO<<"DRIVING MODE"<<mode;
     SetDrivingMode(mode);
   }
 
@@ -131,7 +130,6 @@ ErrorCode VehicleController::Update(const ControlCommand &command) {
     Acceleration(control_command.acceleration());
     Brake(control_command.brake());
     SetEpbBreak(control_command);
-    AINFO<<"FINISH COMPONET ENANLE";
   }
 
   if (driving_mode_ == Chassis::COMPLETE_AUTO_DRIVE ||

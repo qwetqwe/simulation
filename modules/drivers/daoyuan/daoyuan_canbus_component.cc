@@ -112,6 +112,8 @@ bool DaoyuanCanbusComponent::Proc() {
   Daoyuan daoyuan;
   LocalizationEstimate localization;
   LocalizationStatus status;
+  common::util::FillHeader("daoyuan", &localization); 
+  common::util::FillHeader("daoyuan",&status);
   sensor_message_manager_->GetSensorData(&daoyuan);
   if (daoyuan.has_acc_front())  {
     localization.mutable_pose()->mutable_linear_acceleration_vrf()->set_x(daoyuan.acc_right());
@@ -133,8 +135,8 @@ bool DaoyuanCanbusComponent::Proc() {
   }
   if (daoyuan.has_height())  {
     localization.mutable_pose()->mutable_position()->set_z(daoyuan.height());
-    localization.set_measurement_time(daoyuan.ins_time());
-    status.set_measurement_time(daoyuan.ins_time());
+    localization.set_measurement_time(localization.header().timestamp_sec());
+    status.set_measurement_time(status.header().timestamp_sec());
   }
   if (daoyuan.has_lon())  {
     double x=daoyuan.lon()*DEG_TO_RAD_LOCAL;
@@ -182,7 +184,7 @@ void DaoyuanCanbusComponent::PublishPoseBroadcastTF(
   apollo::transform::TransformStamped tf2_msg;
 
   auto mutable_head = tf2_msg.mutable_header();
-  mutable_head->set_timestamp_sec(localization.measurement_time());
+  mutable_head->set_timestamp_sec(localization.header().timestamp_sec());
   mutable_head->set_frame_id(broadcast_tf_frame_id_);
   tf2_msg.set_child_frame_id(broadcast_tf_child_frame_id_);
 

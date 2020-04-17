@@ -35,7 +35,7 @@ void Steeringreport322::Parse(const std::uint8_t* bytes, int32_t length,
   chassis->mutable_tayron()->mutable_steering_report_322()->set_steering_angle_status(steering_angle_status(bytes, length));
   int mode=steering_control_status(bytes, length);
   chassis->mutable_tayron()->mutable_steering_report_322()->set_steering_control_status(mode);
-  if (mode==3)
+  if (mode==5)
     chassis->mutable_check_response()->set_is_eps_online(false);
   else
     chassis->mutable_check_response()->set_is_eps_online(true);
@@ -63,7 +63,7 @@ double Steeringreport322::steering_angle_status(const std::uint8_t* bytes, int32
 // config detail: {'name': 'steering_control_status', 'enum': {0: 'STEERING_CONTROL_STATUS_STANDBYMODE', 1: 'STEERING_CONTROL_STATUS_AUTOSTEERINGMODE', 3: 'STEERING_CONTROL_STATUS_LKAMODE', 4: 'STEERING_CONTROL_STATUS_EPSMODE', 5: 'STEERING_CONTROL_STATUS_MANUALINTERVENTMODE', 6: 'STEERING_CONTROL_STATUS_WARNINGMODE', 7: 'STEERING_CONTROL_STATUS_ERRORMODE'}, 'precision': 1.0, 'len': 4, 'is_signed_var': False, 'offset': 0.0, 'physical_range': '[0|15]', 'bit': 60, 'type': 'enum', 'order': 'intel', 'physical_unit': ''}
 int Steeringreport322::steering_control_status(const std::uint8_t* bytes, int32_t length) const {
   Byte t0(bytes + 7);
-  int32_t x = t0.get_byte(4, 4);
+  int32_t x = t0.get_byte(0, 4);
   return x;
 }
 

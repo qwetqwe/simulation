@@ -55,7 +55,7 @@ class Shiftcmd217 : public ::apollo::drivers::canbus::ProtocolData<
 
 
   // config detail: {'name': 'shift_gear_position_cmd', 'enum': {0: 'SHIFT_GEAR_POSITION_CMD_N', 1: 'SHIFT_GEAR_POSITION_CMD_D', 2: 'SHIFT_GEAR_POSITION_CMD_R', 3: 'SHIFT_GEAR_POSITION_CMD_P', 4: 'SHIFT_GEAR_POSITION_CMD_NONE'}, 'precision': 1.0, 'len': 4, 'is_signed_var': False, 'offset': 0.0, 'physical_range': '[0|7]', 'bit': 8, 'type': 'enum', 'order': 'intel', 'physical_unit': ''}
-  Shiftcmd217* set_shift_gear_position_cmd(Shift_cmd_217::Shift_gear_position_cmdType shift_gear_position_cmd);
+  Shiftcmd217* set_shift_gear_position_cmd(int shift_gear_position_cmd);
 
   // config detail: {'name': 'shift_control_cmd', 'enum': {0: 'SHIFT_CONTROL_CMD_INVALID', 1: 'SHIFT_CONTROL_CMD_INTELLIGENCE', 2: 'SHIFT_CONTROL_CMD_MANUAL', 3: 'SHIFT_CONTROL_CMD_MANUALINTERVENERECOVERY'}, 'precision': 1.0, 'len': 2, 'is_signed_var': False, 'offset': 0.0, 'physical_range': '[0|3]', 'bit': 0, 'type': 'enum', 'order': 'intel', 'physical_unit': ''}
   Shiftcmd217* set_shift_control_cmd(Shift_cmd_217::Shift_control_cmdType shift_control_cmd);
@@ -64,13 +64,13 @@ class Shiftcmd217 : public ::apollo::drivers::canbus::ProtocolData<
  private:
 
   // config detail: {'name': 'shift_gear_position_cmd', 'enum': {0: 'SHIFT_GEAR_POSITION_CMD_N', 1: 'SHIFT_GEAR_POSITION_CMD_D', 2: 'SHIFT_GEAR_POSITION_CMD_R', 3: 'SHIFT_GEAR_POSITION_CMD_P', 4: 'SHIFT_GEAR_POSITION_CMD_NONE'}, 'precision': 1.0, 'len': 4, 'is_signed_var': False, 'offset': 0.0, 'physical_range': '[0|7]', 'bit': 8, 'type': 'enum', 'order': 'intel', 'physical_unit': ''}
-  void set_p_shift_gear_position_cmd(uint8_t* data, Shift_cmd_217::Shift_gear_position_cmdType shift_gear_position_cmd);
+  void set_p_shift_gear_position_cmd(uint8_t* data, int shift_gear_position_cmd);
 
   // config detail: {'name': 'shift_control_cmd', 'enum': {0: 'SHIFT_CONTROL_CMD_INVALID', 1: 'SHIFT_CONTROL_CMD_INTELLIGENCE', 2: 'SHIFT_CONTROL_CMD_MANUAL', 3: 'SHIFT_CONTROL_CMD_MANUALINTERVENERECOVERY'}, 'precision': 1.0, 'len': 2, 'is_signed_var': False, 'offset': 0.0, 'physical_range': '[0|3]', 'bit': 0, 'type': 'enum', 'order': 'intel', 'physical_unit': ''}
   void set_p_shift_control_cmd(uint8_t* data, Shift_cmd_217::Shift_control_cmdType shift_control_cmd);
 
  private:
-  Shift_cmd_217::Shift_gear_position_cmdType shift_gear_position_cmd_;
+  int shift_gear_position_cmd_;
   Shift_cmd_217::Shift_control_cmdType shift_control_cmd_;
 };
 

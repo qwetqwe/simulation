@@ -65,11 +65,13 @@ Steeringcmd215* Steeringcmd215::set_steering_angle_cmd(
 
 Steeringcmd215* Steeringcmd215::set_enable() {
   steering_control_cmd_ = Steering_cmd_215::STEERING_CONTROL_CMD_AUTOSTEERINGMODEORDER;
+  steering_angle_valid_cmd_=Steering_cmd_215::STEERING_ANGLE_VALID_CMD_VALID;
   return this;
 }
 
 Steeringcmd215* Steeringcmd215::set_disable() {
   steering_control_cmd_ = Steering_cmd_215::STEERING_CONTROL_CMD_EPSMODEORDER;
+  steering_angle_valid_cmd_=Steering_cmd_215::STEERING_ANGLE_VALID_CMD_INVALID;
   return this;
 }
 
@@ -82,7 +84,7 @@ Steeringcmd215* Steeringcmd215::set_driver_override() {
 void Steeringcmd215::set_p_steering_angle_cmd(uint8_t* data,
     double steering_angle_cmd) {
   steering_angle_cmd = ProtocolData::BoundedValue(-870.0, 870.0, steering_angle_cmd);
-  int x = (steering_angle_cmd - -870.000000) / 0.100000;
+  int x = (steering_angle_cmd + 870.000000) / 0.100000;
   uint8_t t = 0;
 
   t = x & 0xFF;

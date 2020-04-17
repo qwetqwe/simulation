@@ -219,9 +219,7 @@ Chassis TayronController::chassis() {
     chassis_.set_steering_percentage(
         static_cast<float>(chassis_detail.tayron().steering_report_322().steering_angle_status() * 100.0 /
                            vehicle_params_.max_steer_angle()));
-     AINFO<<"PERCENTAGE"<<chassis_detail.tayron().steering_report_322().steering_angle_status()<<"MAX_STEER_ANGLE"<<vehicle_params_.max_steer_angle();
   } else {
-    AINFO<<"NO STEERING CHASSISDETAIL";
     chassis_.set_steering_percentage(0);
   }
   // 12
@@ -351,11 +349,6 @@ void TayronController::Gear(Chassis::GearPosition gear_position) {
     return;
   }
   //return;
-  if (gear_position==Chassis::GEAR_DRIVE && chassis_.gear_location()==Chassis::GEAR_NEUTRAL && (brake_status_!=1))
-  {
-    brake40_for_shift=5;
-    gear_position=Chassis::GEAR_NEUTRAL;
-  }
   /* ADD YOUR OWN CAR CHASSIS OPERATION*/
   switch (gear_position) {
     case Chassis::GEAR_NEUTRAL: {
@@ -412,11 +405,6 @@ void TayronController::Brake(double pedal) {
     return;
   }
   /* ADD YOUR OWN CAR CHASSIS OPERATION*/
-  if (brake40_for_shift>0){
-    brake_cmd_214_->set_brake_pedal_cmd(40);
-    brake40_for_shift--;
-  }
-  else
     brake_cmd_214_->set_brake_pedal_cmd(pedal);
 }
 
@@ -429,10 +417,7 @@ void TayronController::Throttle(double pedal) {
     return;
   }
   /* ADD YOUR OWN CAR CHASSIS OPERATION*/
-  if (brake40_for_shift>0)
-    gas_cmd_216_->set_gas_pedal_cmd(0);
-  else
-    gas_cmd_216_->set_gas_pedal_cmd(pedal);
+  gas_cmd_216_->set_gas_pedal_cmd(pedal);
 }
 
 // confirm the car is driven by acceleration command or throttle/brake pedal

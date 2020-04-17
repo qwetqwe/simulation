@@ -28,7 +28,7 @@ void Acc500::Parse(const std::uint8_t *bytes, int32_t length, Daoyuan *daoyuan_)
     //vehicle coordinate (Right/Forward/Up)
     daoyuan_->set_acc_right(acc_right(bytes,length));
     daoyuan_->set_acc_front(acc_front(bytes,length));
-    daoyuan_->set_acc_up(-acc_down(bytes,length));
+    daoyuan_->set_acc_up(-acc_down(bytes,length)-9.8);
 }
 
 

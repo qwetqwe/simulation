@@ -31,3 +31,4 @@ extrinsic_file {
     file_path: "/apollo/modules/perception/data/params/radar_front_extrinsics.yaml"
     enable: true
 }
+
