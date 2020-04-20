@@ -1,6 +1,6 @@
-frame_id: "Robosense16_left"
-convert_channel_name: "/apollo/sensor/Robosense16_left/PointCloud2"
-scan_channel: "/apollo/sensor/Robosense16_left/scan"
+frame_id: "robosense16_left"
+convert_channel_name: "/apollo/sensor/robosense16_left/PointCloud2"
+scan_channel: "/apollo/sensor/robosense16_left/scan"
 rpm: 600.0
 model: RS16
 mode: STRONGEST

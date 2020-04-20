@@ -37,8 +37,8 @@ int main(int argc, char **argv) {
   apollo::hdmap::Map pb_map;
   CHECK(apollo::cyber::common::GetProtoFromFile(map_filename, &pb_map))
       << "fail to load data from : " << map_filename;
-
-  const std::string output_bin_file = FLAGS_output_dir + "/base_map.bin";
+  FLAGS_output_dir=FLAGS_map_dir;
+  const std::string output_bin_file =  + "/base_map.bin";
   CHECK(apollo::cyber::common::SetProtoToBinaryFile(pb_map, output_bin_file))
       << "failed to output binary format base map";
 

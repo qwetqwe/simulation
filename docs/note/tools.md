@@ -32,6 +32,14 @@
 `bash modules/perception/lidar/tools/run_offline_lidar_obstacle_perception.sh `
  apollo 内有pcl库，可以通过`pcl_viewer`命令查看pcd文件
  ## map
+- 从record中抽取轨迹点，产生output_file.txt:
+  ` python modules/tools/map_gen/extract_path.py output_file.txt apollo_rosbag/sensor_rgb.record `
+- 根据output_file.txt轨迹生成单车道线base_map:
+  * `python modules/tools/map_gen/map_gen_single_lane.py output_file.txt gen_base_map.txt 0`  
+- 根据output_file.txt轨迹生成双车道线base_map(轨迹点为右侧车道线，左侧为虚拟生成的车道线):
+- * `python modules/tools/map_gen/map_gen_two_lanes_right_ext.py output_file.txt gen_base_map.txt`  
+- 提取output_file轨迹生成三车道线(轨迹点为左侧车道线，右侧、中间为虚拟车道线)：
+  * `python modules/tools/map_gen/map_gen.py output_file.txt`
 - pb、xml、bin间地图格式转换：
   * `./bazel-bin/modules/map/tools/bin_map_generator`
   * `./bazel-bin/modules/map/tools/bin2pb_map_generator`
