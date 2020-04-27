@@ -68,7 +68,11 @@ bool RadarDetectionComponent::Proc(const std::shared_ptr<ContiRadar>& message) {
     return false;
   }
   writer_->Write(out_message);
-  AINFO << "Send radar processing output message.";
+  AINFO << "Send radar processing output message. ";
+  if (out_message!=nullptr)
+  AINFO<<"sensor id "<<out_message->sensor_id_;
+  if (out_message!=nullptr &&out_message->frame_!=nullptr)
+  AINFO<<"obj num"<<out_message->frame_->objects.size();
   return true;
 }
 

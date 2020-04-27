@@ -40,6 +40,11 @@ def preprocess(filename):
 
     data['imu'] = np.append(data['imu'][-SPEED_DELAY / 10:],
                             data['imu'][0:-SPEED_DELAY / 10])
+    ind=0
+    while ind<len(data):
+        if (data['imu'][ind]>0) and (data['ctlbrake'][ind]>0):
+            data['imu'][ind]=0
+        ind= ind+1
     return data
 
 def get_start_index(data):

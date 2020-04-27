@@ -4,8 +4,8 @@ header:
       nsecs: 0
     seq: 0
     frame_id: robosense32
-  child_frame_id: velodyne16_rear_left
-  transform:
+child_frame_id: velodyne16_rear_left
+transform:
     rotation:
       x: 2.14834e-05
       y: 0.0132924

@@ -17,7 +17,7 @@
 /**
  * @file
  */
-
+#include "modules/common/math/euler_angles_zxy.h"
 #include "modules/common/adapters/adapter_gflags.h"
 #include "modules/drivers/canbus/can_client/can_client_factory.h"
 #include "modules/drivers/canbus/proto/sensor_canbus_conf.pb.h"
@@ -25,6 +25,7 @@
 #include "modules/drivers/daoyuan/daoyuan_canbus_component.h"
 #include "modules/drivers/daoyuan/daoyuan_message_manager.h"
 #include <proj_api.h>
+#include "modules/common/math/quaternion.h"
 /**
  * @namespace apollo::drivers::daoyuan
  * @brief apollo::drivers
@@ -39,6 +40,8 @@ using apollo::drivers::canbus::SensorCanbusConf;
 using apollo::localization::LocalizationEstimate;
 using apollo::localization::LocalizationStatus;
 using apollo::localization::MeasureState;
+using ::Eigen::Vector3d;
+using apollo::common::math::EulerAnglesZXYd;
 DaoyuanCanbusComponent::DaoyuanCanbusComponent()
     : monitor_logger_buffer_(
           apollo::common::monitor::MonitorMessageItem::GNSS) {}
@@ -115,24 +118,39 @@ bool DaoyuanCanbusComponent::Proc() {
   common::util::FillHeader("daoyuan", &localization); 
   common::util::FillHeader("daoyuan",&status);
   sensor_message_manager_->GetSensorData(&daoyuan);
+  if (daoyuan.has_yaw())  {
+    EulerAnglesZXYd euler(daoyuan.roll(),daoyuan.pitch(),daoyuan.yaw());
+    Eigen::Quaternion<double> res=euler.ToQuaternion();
+    localization.mutable_pose()->set_heading(daoyuan.yaw());
+    localization.mutable_pose()->mutable_orientation()->set_qx(res.x());
+    localization.mutable_pose()->mutable_orientation()->set_qy(res.y());
+    localization.mutable_pose()->mutable_orientation()->set_qz(res.z());
+    localization.mutable_pose()->mutable_orientation()->set_qw(res.w());   
+  }
   if (daoyuan.has_acc_front())  {
     localization.mutable_pose()->mutable_linear_acceleration_vrf()->set_x(daoyuan.acc_right());
     localization.mutable_pose()->mutable_linear_acceleration_vrf()->set_y(daoyuan.acc_front());
     localization.mutable_pose()->mutable_linear_acceleration_vrf()->set_z(daoyuan.acc_up());
+    Vector3d orig(daoyuan.acc_right(), daoyuan.acc_front(), daoyuan.acc_up());
+    Vector3d vec = common::math::QuaternionRotate(
+            localization.mutable_pose()->orientation(), orig);
+    localization.mutable_pose()->mutable_linear_acceleration()->set_x(vec[0]);
+    localization.mutable_pose()->mutable_linear_acceleration()->set_y(vec[1]);
+    localization.mutable_pose()->mutable_linear_acceleration()->set_z(vec[2]);
   }
   if (daoyuan.has_pitch_rate())  {
     localization.mutable_pose()->mutable_angular_velocity_vrf()->set_x(daoyuan.pitch_rate());
     localization.mutable_pose()->mutable_angular_velocity_vrf()->set_y(daoyuan.roll_rate());
     localization.mutable_pose()->mutable_angular_velocity_vrf()->set_z(daoyuan.yaw_rate());
+    Vector3d orig(daoyuan.pitch_rate(), daoyuan.roll_rate(), daoyuan.yaw_rate());
+    Vector3d vec = common::math::QuaternionRotate(
+            localization.mutable_pose()->orientation(), orig);
+    localization.mutable_pose()->mutable_angular_velocity()->set_x(vec[0]);
+    localization.mutable_pose()->mutable_angular_velocity()->set_y(vec[1]);
+    localization.mutable_pose()->mutable_angular_velocity()->set_z(vec[2]);
+
   }
-  if (daoyuan.has_yaw())  {
-    localization.mutable_pose()->set_heading(daoyuan.yaw());
-    Eigen::Quaternion<double> qu = apollo::common::math::HeadingToQuaternion(daoyuan.yaw());
-    localization.mutable_pose()->mutable_orientation()->set_qx(qu.x());
-    localization.mutable_pose()->mutable_orientation()->set_qy(qu.y());
-    localization.mutable_pose()->mutable_orientation()->set_qz(qu.z());
-    localization.mutable_pose()->mutable_orientation()->set_qw(qu.w());
-  }
+  
   if (daoyuan.has_height())  {
     localization.mutable_pose()->mutable_position()->set_z(daoyuan.height());
     localization.set_measurement_time(localization.header().timestamp_sec());

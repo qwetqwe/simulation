@@ -6,7 +6,7 @@ module_config {
       name: "FrontRadarDetection"
       config_file_path: "/apollo/modules/perception/production/conf/perception/radar/front_radar_component_conf.pb.txt"
       readers {
-          channel: "/apollo/sensor/radar/front"
+          channel: "/apollo/sensor/conti_radar"
         }
       flag_file_path: "/apollo/modules/perception/production/conf/perception/perception_common.flag"
     }

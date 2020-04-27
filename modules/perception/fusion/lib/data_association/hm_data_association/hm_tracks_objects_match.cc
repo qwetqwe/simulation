@@ -64,7 +64,8 @@ bool HMTrackersObjectsAssociation::Associate(
   double measurement_timestamp = sensor_objects[0]->GetTimestamp();
   track_object_distance_.ResetProjectionCache(measurement_sensor_id,
                                               measurement_timestamp);
-  bool do_nothing = (sensor_objects[0]->GetSensorId() == "radar_front");
+  //bool do_nothing = (sensor_objects[0]->GetSensorId() == "radar_front");
+  bool do_nothing = false;
   IdAssign(fusion_tracks, sensor_objects, &association_result->assignments,
            &association_result->unassigned_tracks,
            &association_result->unassigned_measurements, do_nothing, false);

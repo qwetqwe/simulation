@@ -146,7 +146,6 @@ void Compensator::MotionCompensation(
   double d = q0.dot(q1);
   double abs_d = abs(d);
   double f = 1.0 / static_cast<double>(timestamp_max - timestamp_min);
-
   // Threshold for a "significant" rotation from min_time to max_time:
   // The LiDAR range accuracy is ~2 cm. Over 70 meters range, it means an angle
   // of 0.02 / 70 =
@@ -194,23 +193,26 @@ void Compensator::MotionCompensation(
     return;
   }
   // Not a "significant" rotation. Do translation only.
+  auto* point_new = msg_compensated->add_point();
+  AINFO<<"size"<<msg->point_size();
   for (auto& point : msg->point()) {
     float x_scalar = point.x();
     if (std::isnan(x_scalar)) {
-      AERROR << "nan point do not need motion compensation";
+    //  AERROR << "nan point do not need motion compensation";
       continue;
-    }
+    } 
+
     float y_scalar = point.y();
     float z_scalar = point.z();
     Eigen::Vector3d p(x_scalar, y_scalar, z_scalar);
 
     uint64_t tp = point.timestamp();
     double t = static_cast<double>(timestamp_max - tp) * f;
+    
     Eigen::Translation3d ti(t * translation);
-
     p = ti * p;
-
-    auto* point_new = msg_compensated->add_point();
+    
+    //auto* point_new = msg_compensated->add_point();
     point_new->set_intensity(point.intensity());
     point_new->set_timestamp(point.timestamp());
     point_new->set_x(static_cast<float>(p.x()));

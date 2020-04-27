@@ -99,7 +99,6 @@ bool Texture::UpdateData(
 #undef CLAMP
     }
   } else if (imgData->encoding() == std::string("rgb8")) {
-    std::cout<<"size"<<imgData->data().size()<<"img size"<<imgSize<<std::endl;
     memcpy(data_, imgData->data().c_str(), imgSize);
   } else if (imgData->encoding() == std::string("bgr8")) {
     memcpy(data_, imgData->data().c_str(), imgSize);

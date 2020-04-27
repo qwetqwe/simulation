@@ -55,6 +55,7 @@ bool RSDriver::RSPoll(const std::shared_ptr<PointCloud>& pc) {
     pc->set_height(16);
   pc->mutable_header()->set_frame_id(config_.frame_id());
   pc->mutable_header()->set_sequence_num(0);  // TODO
+  pc->mutable_header()->set_timestamp_sec(cyber::Time().Now().ToSecond());
   while (1) {
     int status = -5;
     rslidar_driver::rslidarPacket pkt;

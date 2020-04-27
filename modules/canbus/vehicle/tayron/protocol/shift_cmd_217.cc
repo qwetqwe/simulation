@@ -38,13 +38,14 @@ uint32_t Shiftcmd217::GetPeriod() const {
 void Shiftcmd217::UpdateData(uint8_t* data) {
   for (int i=0;i<=7;i++)
     data[i]=0;
-  set_p_shift_gear_position_cmd(data, shift_gear_position_cmd_);
+ // set_p_shift_gear_position_cmd(data, shift_gear_position_cmd_);
+  set_p_shift_gear_position_cmd(data, 4);  // always d
   set_p_shift_control_cmd(data, shift_control_cmd_);
 }
 
 void Shiftcmd217::Reset() {
   // TODO(All) :  you should check this manually
-  shift_gear_position_cmd_ = 3;
+  shift_gear_position_cmd_ = 4;
   shift_control_cmd_ = Shift_cmd_217::SHIFT_CONTROL_CMD_MANUAL;
 }
 

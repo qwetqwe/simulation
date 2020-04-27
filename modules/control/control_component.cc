@@ -151,7 +151,7 @@ void ControlComponent::OnMonitor(
     const common::monitor::MonitorMessage &monitor_message) {
   for (const auto &item : monitor_message.item()) {
     if (item.log_level() == common::monitor::MonitorMessageItem::FATAL) {
-      estop_ = true;
+    //  estop_ = true;  for debug
       return;
     }
   }

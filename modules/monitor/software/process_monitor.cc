@@ -94,7 +94,7 @@ void ProcessMonitor::UpdateStatus(
       return;
     }
   }
-  SummaryMonitor::EscalateStatus(ComponentStatus::FATAL, "", status);
+  SummaryMonitor::EscalateStatus(ComponentStatus::FATAL, "not match", status);
 }
 
 }  // namespace monitor

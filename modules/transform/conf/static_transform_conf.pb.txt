@@ -1,7 +1,14 @@
 extrinsic_file {
     frame_id: "novatel"
+    child_frame_id: "velodyne64"
+    file_path: "/apollo/modules/drivers/velodyne/params/velodyne64_novatel_extrinsics.yaml"
+    enable: true
+}
+
+extrinsic_file {
+    frame_id: "novatel"
     child_frame_id: "robosense32"
-    file_path: "/apollo/modules/drivers/velodyne/params/velodyne128_novatel_extrinsics.yaml"
+    file_path: "/apollo/modules/drivers/velodyne/params/robosense32_novatel_extrinsics.yaml"
     enable: true
 }
 
@@ -35,7 +42,7 @@ extrinsic_file {
 
 extrinsic_file {
     frame_id: "robosense32"
-    child_frame_id: "lidar16_front"
+    child_frame_id: "velodyne16_front_center"
     file_path: "/apollo/modules/drivers/velodyne/params/lidar16_front_robosense32_extrinsics.yaml"
     enable: true
 }

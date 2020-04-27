@@ -6,6 +6,9 @@ cc_library(
     name = "probabilistic_fusion",
     srcs = ["probabilistic_fusion.cc"],
     hdrs = ["probabilistic_fusion.h"],
+    copts = [
+        '-DMODULE_NAME=\\"perception\\"',
+    ],
     deps = [
         "//cyber",
         "//modules/common/time",

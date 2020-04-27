@@ -1,6 +1,6 @@
-frame_id: "Robosense32"
-convert_channel_name: "/apollo/sensor/Robosense32/PointCloud2"
-scan_channel: "/apollo/sensor/Robosense32/scan"
+frame_id: "robosense32"
+convert_channel_name: "/apollo/sensor/robosense32/PointCloud2"
+scan_channel: "/apollo/sensor/robosense32/scan"
 rpm: 600.0
 model: RS32
 mode: STRONGEST

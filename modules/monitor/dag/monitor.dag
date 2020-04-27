@@ -4,7 +4,8 @@ module_config {
         class_name : "Monitor"
         config {
             name: "monitor"
-            interval: 500
+            flag_file_path: "/apollo/modules/common/data/global_flagfile.txt"
+            interval: 5000
         }
     }
 }

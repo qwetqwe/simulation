@@ -31,7 +31,7 @@ class Interpolation2DTest : public ::testing::Test {
  public:
   virtual void SetUp() {
     std::string control_conf_file =
-        "/apollo/modules/control/testdata/conf/control_conf.pb.txt";
+        "/apollo/modules/control/conf/control_conf.pb.txt";
     CHECK(cyber::common::GetProtoFromFile(control_conf_file, &control_conf_));
   }
 
@@ -84,7 +84,7 @@ TEST_F(Interpolation2DTest, calibration_table) {
   }
   Interpolation2D estimator;
   EXPECT_TRUE(estimator.Init(xyz));
-
+  AINFO<<"LOOKUP -1 2 "<<estimator.Interpolate(std::make_pair(5.5, 40));
   for (const auto &elem : xyz) {
     EXPECT_DOUBLE_EQ(std::get<2>(elem),
                      estimator.Interpolate(

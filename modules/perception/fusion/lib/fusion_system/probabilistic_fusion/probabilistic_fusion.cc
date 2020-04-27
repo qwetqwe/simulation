@@ -398,7 +398,7 @@ void ProbabilisticFusion::CollectFusedObjects(
       ++bg_obj_num;
     }
   }
-
+  AINFO<<"fore_tracks"<<foreground_tracks.size()<<" back_tracks"<<background_tracks.size();
   AINFO << "collect objects : fg_obj_cnt = " << fg_obj_num
         << ", bg_obj_cnt = " << bg_obj_num
         << ", timestamp = " << GLOG_TIMESTAMP(timestamp);

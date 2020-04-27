@@ -1,5 +1,5 @@
 fusion_method: "DummyFusionSystem"
-fusion_main_sensor: "radar_front"
+fusion_main_sensor: "velodyne64"
 object_in_roi_check: true
 radius_for_roi_object_check: 120
 output_obstacles_channel_name: "/apollo/perception/obstacles"

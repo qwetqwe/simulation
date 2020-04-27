@@ -10,12 +10,7 @@ cyber_modules {
     dag_files: "/apollo/modules/control/dag/control.dag"
   }
 }
-cyber_modules {
-  key: "GPS"
-  value: {
-    dag_files: "/apollo/modules/drivers/gnss/dag/gnss.dag"
-  }
-}
+
 cyber_modules {
   key: "Guardian"
   value: {
@@ -23,9 +18,9 @@ cyber_modules {
   }
 }
 cyber_modules {
-  key: "Localization"
+  key: "Daoyuan"
   value: {
-    dag_files: "/apollo/modules/localization/dag/dag_streaming_rtk_localization.dag"
+    dag_files: "/apollo/modules/drivers/daoyuan/dag/daoyuan.dag"
   }
 }
 modules {
@@ -60,12 +55,7 @@ modules {
     }
   }
 }
-monitored_components {
-  key: "Localization"
-  value: {
-    # Special LocalizationMonitor.
-  }
-}
+
 monitored_components {
   key: "Data Recorder"
   value: {

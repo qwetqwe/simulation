@@ -90,7 +90,7 @@ class DataCollector(object):
         self.controlcmd.pad_msg.action = 2
         self.control_pub.write(self.controlcmd)
 
-        time.sleep(0.2)
+        time.sleep(0.3)
         # Set Default Message
         print('Send Default Command.')
         self.controlcmd.pad_msg.action = 1
@@ -133,7 +133,6 @@ class DataCollector(object):
         self.brake_percentage = data.brake_percentage
         self.gear_location = data.gear_location
         self.driving_mode = data.driving_mode
-
         self.canmsg_received = True
         if self.in_session:
             self.write_file(timenow, 0)

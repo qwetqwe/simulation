@@ -24,7 +24,7 @@
 DEFINE_string(summary_monitor_name, "SummaryMonitor",
               "Name of the summary monitor.");
 
-DEFINE_double(system_status_publish_interval, 10,
+DEFINE_double(system_status_publish_interval, 3,
               "SystemStatus publish interval.");
 
 namespace apollo {
@@ -80,6 +80,7 @@ void SummaryMonitor::RunOnce(const double current_time) {
 
     apollo::common::util::FillHeader("SystemMonitor", status);
     writer->Write(*status);
+    AINFO<<"status "<<status->DebugString();
     status->clear_header();
     system_status_fp_ = new_fp;
     last_broadcast_ = current_time;

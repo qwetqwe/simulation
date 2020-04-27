@@ -85,6 +85,7 @@ bool PbfGatekeeper::AbleToPublish(const TrackPtr &track) {
   bool is_night = (timeinfo.tm_hour >= 23);
   if (!LidarAbleToPublish(track) && !RadarAbleToPublish(track, is_night) &&
       !CameraAbleToPublish(track, is_night)) {
+    AINFO<<"ALL NOT ABLE TO PUBLISH "<<"id "<<track->GetTrackId();
     return false;
   }
 
@@ -92,6 +93,7 @@ bool PbfGatekeeper::AbleToPublish(const TrackPtr &track) {
   if (params_.use_track_time_pub_strategy &&
       track->GetTrackedTimes() <=
           static_cast<size_t>(params_.pub_track_time_thresh)) {
+    AINFO<<"LESS TRACKED TIMES"<<track->GetTrackedTimes()<<"id "<<track->GetTrackId();
     return false;
   }
   return true;
@@ -111,49 +113,49 @@ bool PbfGatekeeper::RadarAbleToPublish(const TrackPtr &track, bool is_night) {
   if (params_.publish_if_has_radar && visible_in_radar &&
       radar_object != nullptr) {
     if (radar_object->GetSensorId() == "radar_front") {
-      return false;
-      // if (radar_object->GetBaseObject()->radar_supplement.range >
-      //         params_.min_radar_confident_distance &&
-      //     radar_object->GetBaseObject()->radar_supplement.angle <
-      //         params_.max_radar_confident_angle) {
-      //   double heading_v =
-      //       std::abs(track->GetFusedObject()->GetBaseObject()->velocity.dot(
-      //           track->GetFusedObject()->GetBaseObject()->direction));
-      //   double toic_p = track->GetToicProb();
-      //   auto set_velocity_to_zero = [heading_v, track]() {
-      //     if (heading_v < 0.3) {
-      //       track->GetFusedObject()->GetBaseObject()->velocity.setZero();
-      //     }
-      //   };
-      //   if (!is_night) {
-      //     if (toic_p > params_.toic_threshold) {
-      //       set_velocity_to_zero();
-      //       return true;
-      //     }
-      //   } else {
-      //     // the velocity buffer is [-3, +3] m/s
-      //     double v_ct = 4.0;
-      //     double v_slope = 1.0;
-      //     auto heading_v_decision = [](double x, double c, double k) {
-      //       x = x - c;
-      //       return 0.5 + 0.5 * x * k / std::sqrt(1 + x * x * k * k);
-      //     };
-      //     auto fuse_two_probabilities = [](double p1, double p2) {
-      //       double p = (p1 * p2) / (2 * p1 * p2 + 1 - p1 - p2);
-      //       p = std::min(1.0 - std::numeric_limits<float>::epsilon(), p);
-      //       return p;
-      //     };
+   //   return false;
+      if (radar_object->GetBaseObject()->radar_supplement.range >
+              params_.min_radar_confident_distance &&
+          radar_object->GetBaseObject()->radar_supplement.angle <
+              params_.max_radar_confident_angle) {
+        double heading_v =
+            std::abs(track->GetFusedObject()->GetBaseObject()->velocity.dot(
+                track->GetFusedObject()->GetBaseObject()->direction));
+        double toic_p = track->GetToicProb();
+        auto set_velocity_to_zero = [heading_v, track]() {
+          if (heading_v < 0.3) {
+            track->GetFusedObject()->GetBaseObject()->velocity.setZero();
+          }
+        };
+        if (!is_night) {
+          if (toic_p > params_.toic_threshold) {
+            set_velocity_to_zero();
+            return true;
+          }
+        } else {
+          // the velocity buffer is [-3, +3] m/s
+          double v_ct = 4.0;
+          double v_slope = 1.0;
+          auto heading_v_decision = [](double x, double c, double k) {
+            x = x - c;
+            return 0.5 + 0.5 * x * k / std::sqrt(1 + x * x * k * k);
+          };
+          auto fuse_two_probabilities = [](double p1, double p2) {
+            double p = (p1 * p2) / (2 * p1 * p2 + 1 - p1 - p2);
+            p = std::min(1.0 - std::numeric_limits<float>::epsilon(), p);
+            return p;
+          };
 
-      //     double min_toic_p = 0.2;
-      //     toic_p = std::max(min_toic_p, toic_p);
-      //     double v_p = heading_v_decision(heading_v, v_ct, v_slope);
-      //     double p = fuse_two_probabilities(toic_p, v_p);
-      //     if (p > 0.5) {
-      //       set_velocity_to_zero();
-      //       return true;
-      //     }
-      //   }
-      // }
+          double min_toic_p = 0.2;
+          toic_p = std::max(min_toic_p, toic_p);
+          double v_p = heading_v_decision(heading_v, v_ct, v_slope);
+          double p = fuse_two_probabilities(toic_p, v_p);
+          if (p > 0.5) {
+            set_velocity_to_zero();
+            return true;
+          }
+        }
+      }
     } else if (radar_object->GetSensorId() == "radar_rear") {
       ADEBUG << "radar_rear: min_dis: " << params_.min_radar_confident_distance
              << " obj dist: "

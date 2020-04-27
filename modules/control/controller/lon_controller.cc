@@ -303,11 +303,15 @@ Status LonController::ComputeControlCommand(
   if (FLAGS_use_preview_speed_for_table) {
     calibration_value = control_interpolation_->Interpolate(
         std::make_pair(debug->preview_speed_reference(), acceleration_lookup));
+//        AINFO<<"CHECK TABLE SPEED preview speed"<<debug->preview_speed_reference()<<" acc"<<acceleration_lookup
+//              <<"cali_val "<<calibration_value;
   } else {
     calibration_value = control_interpolation_->Interpolate(
-        std::make_pair(chassis_->speed_mps(), acceleration_lookup));
+        std::make_pair((double)chassis_->speed_mps(), acceleration_lookup));
+//      AINFO<<"CHECK TABLE SPEED speed_mps"<<chassis_->speed_mps()<<" acc"<<acceleration_lookup
+//          <<"cali_val "<<calibration_value;
   }
-
+  
   if (acceleration_lookup >= 0) {
     if (calibration_value >= 0) {
       throttle_cmd = std::max(calibration_value, throttle_lowerbound);
@@ -459,7 +463,7 @@ void LonController::ComputeLongitudinalErrors(
   previous_acceleration_ = debug->current_acceleration();
 
   debug->set_preview_station_error(preview_point.path_point().s() - s_matched);
-  debug->set_preview_speed_error(preview_point.v() - s_dot_matched);
+  debug->set_preview_speed_error(preview_point.v() -VehicleStateProvider::Instance()->linear_velocity());
   debug->set_preview_speed_reference(preview_point.v());
   debug->set_preview_acceleration_reference(preview_point.a());
 }

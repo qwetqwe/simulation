@@ -21,10 +21,10 @@ import sys
 import matplotlib.animation as animation
 import matplotlib.pyplot as plt
 import numpy as np
-
+from cyber_py import cyber
 from modules.canbus.proto import chassis_pb2
 from modules.localization.proto import localization_pb2
-
+import time
 GPS_X = list()
 GPS_Y = list()
 GPS_LINE = None
@@ -38,7 +38,7 @@ def chassis_callback(chassis_data):
     if chassis_data.driving_mode == chassis_pb2.Chassis.COMPLETE_AUTO_DRIVE:
         IS_AUTO_MODE = True
     else:
-        IS_AUTO_MODE = False
+        IS_AUTO_MODE = True # debug
 
     DRIVING_MODE_TEXT = str(chassis_data.driving_mode)
 
@@ -56,8 +56,8 @@ def setup_listener(node):
     node.create_reader(LOCALIZATION_TOPIC,
                        localization_pb2.LocalizationEstimate,
                        localization_callback)
-    while not cyber.is_shutdown():
-        time.sleep(0.002)
+   # while not cyber.is_shutdown():
+   #     time.sleep(0.002)
 
 def update(frame_number):
     global GPS_X
@@ -89,12 +89,10 @@ if __name__ == '__main__':
     fig, ax = plt.subplots()
 
     with open(args.trace, 'r') as fp:
-        trace_data = np.genfromtxt(handle, delimiter=',', names=True)
+        trace_data = np.genfromtxt(args.trace, delimiter=',', names=True)
         ax.plot(trace_data['x'], trace_data['y'], 'b-', alpha=0.5, linewidth=1)
 
-    cyber.init()
-    node = cyber.Node("plot_trace")
-    setup_listener(node)
+    
 
     x_min = min(trace_data['x'])
     x_max = max(trace_data['x'])
@@ -104,5 +102,14 @@ if __name__ == '__main__':
     GPS_LINE, = ax.plot(GPS_X, GPS_Y, 'r', linewidth=3, label="gps")
 
     ani = animation.FuncAnimation(fig, update, interval=100)
-
+    print("at 0")
+    
+    print("at 1")
+    cyber.init()
+    print("at 2")
+    node = cyber.Node("plot_trace")
+    print("at 3")
+    setup_listener(node)
+    print("at 4")
     plt.show()
+    

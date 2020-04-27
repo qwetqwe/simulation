@@ -444,10 +444,10 @@ void TayronController::Steer(double angle) {
     AINFO << "The current driving mode does not need to set steer.";
     return;
   }
-  const double real_angle = vehicle_params_.max_steer_angle() * angle / 100.0;
+  //const double real_angle = vehicle_params_.max_steer_angle() * angle / 100.0;
   // reverse sign
   /* ADD YOUR OWN CAR CHASSIS OPERATION*/
-  steering_cmd_215_->set_steering_angle_cmd(real_angle)->set_steering_v_angle_cmd(200);
+  steering_cmd_215_->set_steering_angle_cmd(angle)->set_steering_v_angle_cmd(200);
 }
 
 // steering with new angle speed
@@ -460,12 +460,12 @@ void TayronController::Steer(double angle, double angle_spd) {
     return;
   }
   /* ADD YOUR OWN CAR CHASSIS OPERATION*/
-  const double real_angle = vehicle_params_.max_steer_angle() * angle / 100.0;
+ // const double real_angle = vehicle_params_.max_steer_angle() * angle / 100.0;
   const double real_angle_spd = ProtocolData<::apollo::canbus::ChassisDetail>::BoundedValue(
       vehicle_params_.min_steer_angle_rate(), vehicle_params_.max_steer_angle_rate(),
       vehicle_params_.max_steer_angle_rate() * angle_spd / 100.0);
-  steering_cmd_215_->set_steering_angle_cmd(real_angle)
-      ->set_steering_v_angle_cmd(real_angle_spd);
+  steering_cmd_215_->set_steering_angle_cmd(angle)
+      ->set_steering_v_angle_cmd(200);
 }
 
 void TayronController::SetEpbBreak(const ControlCommand& command) {
@@ -681,7 +681,7 @@ bool TayronController::CheckResponse(const int32_t flags, bool need_wait) {
       is_eps_online = chassis_detail.has_check_response() &&
                       chassis_detail.check_response().has_is_eps_online() &&
                       chassis_detail.check_response().is_eps_online();
-      check_ok = check_ok && is_eps_online;
+    //  check_ok = check_ok && is_eps_online;
     }
 
     if (flags) {
@@ -694,6 +694,7 @@ bool TayronController::CheckResponse(const int32_t flags, bool need_wait) {
       is_gear_online= chassis_detail.has_check_response() &&
                       chassis_detail.check_response().has_is_gear_online() &&
                       chassis_detail.check_response().is_gear_online();
+      is_gear_online = true;  // for debug 
       check_ok = check_ok && is_vcu_online && is_esp_online && is_gear_online;
     }
     if (check_ok) {

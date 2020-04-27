@@ -9,4 +9,4 @@
   broadcast_tf_frame_id: "world"
   broadcast_tf_child_frame_id: "localization"
   enable_receiver_log: false
-  proj4_text: "+proj=utm +zone=10 +ellps=WGS84 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs"
+  proj4_text: "+proj=utm +zone=51 +ellps=WGS84 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs"

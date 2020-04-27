@@ -83,7 +83,7 @@ Steeringcmd215* Steeringcmd215::set_driver_override() {
 // config detail: {'name': 'steering_Angle_cmd', 'offset': -870.0, 'precision': 0.1, 'len': 16, 'is_signed_var': False, 'physical_range': '[-870|870]', 'bit': 16, 'type': 'double', 'order': 'intel', 'physical_unit': 'deg'}
 void Steeringcmd215::set_p_steering_angle_cmd(uint8_t* data,
     double steering_angle_cmd) {
-  steering_angle_cmd = ProtocolData::BoundedValue(-870.0, 870.0, steering_angle_cmd);
+  steering_angle_cmd = ProtocolData::BoundedValue(-870.0, 870.0, -steering_angle_cmd);
   int x = (steering_angle_cmd + 870.000000) / 0.100000;
   uint8_t t = 0;
 

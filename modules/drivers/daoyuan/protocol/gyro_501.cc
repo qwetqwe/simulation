@@ -42,7 +42,12 @@ double Gyro501::gyro_front(const std::uint8_t *bytes,
     Byte frame_high(bytes + 0);
     uint8_t high = frame_high.get_byte(0,8);
     uint32_t val = (high<<8) | low;
-    return (val*0.0076293-250)/180*3.1415926;
+    double deg_rad=(val*0.0076293-250)/180*3.1415926;
+    if (deg_rad<-M_PI)
+        deg_rad+=2*M_PI;
+    if (deg_rad>M_PI)
+        deg_rad-=2*M_PI;
+    return deg_rad;
 }
 
 double Gyro501::gyro_right(const std::uint8_t *bytes,
@@ -53,7 +58,12 @@ double Gyro501::gyro_right(const std::uint8_t *bytes,
     Byte frame_high(bytes + 2);
     uint8_t high = frame_high.get_byte(0,8);
     uint32_t val = (high<<8) | low;
-    return (val*0.0076293-250)/180*3.1415926;
+    double deg_rad=(val*0.0076293-250)/180*3.1415926;
+    if (deg_rad<-M_PI)
+        deg_rad+=2*M_PI;
+    if (deg_rad>M_PI)
+        deg_rad-=2*M_PI;
+    return deg_rad;
 }
 
 double Gyro501::gyro_down(const std::uint8_t *bytes,
@@ -64,7 +74,12 @@ double Gyro501::gyro_down(const std::uint8_t *bytes,
     Byte frame_high(bytes + 4);
     uint8_t high = frame_high.get_byte(0,8);
     uint32_t val = (high<<8) | low;
-    return (val*0.0076293-250)/180*3.1415926;
+    double deg_rad=(val*0.0076293-250)/180*3.1415926;
+    if (deg_rad<-M_PI)
+        deg_rad+=2*M_PI;
+    if (deg_rad>M_PI)
+        deg_rad-=2*M_PI;
+    return deg_rad;
 }
 
 

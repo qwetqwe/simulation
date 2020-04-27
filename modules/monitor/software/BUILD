@@ -6,6 +6,7 @@ cc_library(
     name = "process_monitor",
     srcs = ["process_monitor.cc"],
     hdrs = ["process_monitor.h"],
+    copts = ['-DMODULE_NAME=\\"monitor\\"'],
     deps = [
         ":summary_monitor",
         "//external:gflags",
@@ -19,6 +20,7 @@ cc_library(
     name = "channel_monitor",
     srcs = ["channel_monitor.cc"],
     hdrs = ["channel_monitor.h"],
+    copts = ['-DMODULE_NAME=\\"monitor\\"'],
     deps = [
         ":latency_monitor",
         ":summary_monitor",
@@ -40,6 +42,7 @@ cc_library(
 cc_library(
     name = "localization_monitor",
     srcs = ["localization_monitor.cc"],
+    copts = ['-DMODULE_NAME=\\"monitor\\"'],
     hdrs = ["localization_monitor.h"],
     deps = [
         ":summary_monitor",
@@ -53,6 +56,7 @@ cc_library(
 cc_library(
     name = "functional_safety_monitor",
     srcs = ["functional_safety_monitor.cc"],
+    copts = ['-DMODULE_NAME=\\"monitor\\"'],
     hdrs = ["functional_safety_monitor.h"],
     deps = [
         "//modules/monitor/common:monitor_manager",
@@ -64,6 +68,7 @@ cc_library(
     name = "summary_monitor",
     srcs = ["summary_monitor.cc"],
     hdrs = ["summary_monitor.h"],
+    copts = ['-DMODULE_NAME=\\"monitor\\"'],
     deps = [
         "//modules/common/adapters:adapter_gflags",
         "//modules/monitor/common:monitor_manager",
@@ -75,6 +80,7 @@ cc_library(
 cc_library(
     name = "recorder_monitor",
     srcs = ["recorder_monitor.cc"],
+    copts = ['-DMODULE_NAME=\\"monitor\\"'],
     hdrs = ["recorder_monitor.h"],
     deps = [
         ":summary_monitor",
@@ -88,6 +94,7 @@ cc_library(
 cc_library(
     name = "latency_monitor",
     srcs = ["latency_monitor.cc"],
+    copts = ['-DMODULE_NAME=\\"monitor\\"'],
     hdrs = ["latency_monitor.h"],
     deps = [
         ":summary_monitor",

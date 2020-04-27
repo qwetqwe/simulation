@@ -123,6 +123,7 @@ void PriSecFusionComponent::AppendPointCloud(
   } else {
     for (auto& point : point_cloud_add->point()) {
       if (std::isnan(point.x())) {
+        continue;
         PointXYZIT* point_new = point_cloud->add_point();
         point_new->set_intensity(point.intensity());
         point_new->set_timestamp(point.timestamp());

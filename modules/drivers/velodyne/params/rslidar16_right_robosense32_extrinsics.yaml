@@ -4,8 +4,7 @@ header:
       nsecs: 0
     seq: 0
     frame_id: robosense32
-  child_frame_id: robosense16_right
-  transform:
+transform:
     rotation:
       x: 0.327457
       y: 0.043588
@@ -15,4 +14,5 @@ header:
       x: 0.0141317
       y: -0.527578
       z: -0.274023
+child_frame_id: robosense16_right
   
