@@ -73,7 +73,7 @@ cc_library(
         no_match_error = "Please Build with an ARM or Linux x86_64 platform",
     ),
     copts = select({
-        ":x86_mode": ["-mavx2"],
+        ":x86_mode": ["-mavx2",'-DMODULE_NAME=\\"camera\\"'],
         ":arm_mode": [""],
     }),
     deps = select(

@@ -32,7 +32,7 @@ const int32_t Steeringreport322::ID = 0x322;
 
 void Steeringreport322::Parse(const std::uint8_t* bytes, int32_t length,
                          ChassisDetail* chassis) const {
-  chassis->mutable_tayron()->mutable_steering_report_322()->set_steering_angle_status(steering_angle_status(bytes, length));
+  chassis->mutable_tayron()->mutable_steering_report_322()->set_steering_angle_status(-steering_angle_status(bytes, length));
   int mode=steering_control_status(bytes, length);
   chassis->mutable_tayron()->mutable_steering_report_322()->set_steering_control_status(mode);
   if (mode==5)

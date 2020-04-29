@@ -124,7 +124,7 @@ class RtkRecord(object):
             caracceleration = 0.0
 
         carsteer = self.chassis.steering_percentage
-        curvature = math.tan(math.radians(carsteer / 100 * 470) / 16) / 2.85
+        curvature = math.tan(math.radians(carsteer / 100 * 490) / 14) / 2.8448
         if abs(carspeed) >= speed_epsilon:
             carcurvature_change_rate = (curvature - self.carcurvature) / (
                 carspeed * 0.01)

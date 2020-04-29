@@ -514,7 +514,7 @@ Status LatController::ComputeControlCommand(
       FLAGS_enable_maximum_steer_rate_limit
           ? vehicle_param_.max_steer_angle_rate() * ts_ * 180 / M_PI /
                 steer_single_direction_max_degree_ * 100
-          : 100.0;
+          : 400.0;
 
   const double steering_position = chassis->steering_percentage();
 

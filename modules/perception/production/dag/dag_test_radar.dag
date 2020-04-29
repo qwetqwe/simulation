@@ -6,13 +6,22 @@ module_config {
       name: "FrontRadarDetection"
       config_file_path: "/apollo/modules/perception/production/conf/perception/radar/front_radar_component_conf.pb.txt"
       readers {
-          channel: "/apollo/sensor/conti_radar"
+          channel: "/apollo/sensor/radar/front"
         }
       flag_file_path: "/apollo/modules/perception/production/conf/perception/perception_common.flag"
     }
   }
-
-
+  components {
+    class_name: "RadarDetectionComponent"
+    config {
+      name: "RearRadarDetection"
+      config_file_path: "/apollo/modules/perception/production/conf/perception/radar/rear_radar_component_conf.pb.txt"
+      readers {
+          channel: "/apollo/sensor/radar/rear"
+        }
+      flag_file_path: "/apollo/modules/perception/production/conf/perception/perception_common.flag"
+    }
+  }
   components {
     class_name: "FusionComponent"
     config {

@@ -57,6 +57,7 @@ class CameraComponent : public Component<> {
   const int32_t MAX_IMAGE_SIZE = 20 * 1024 * 1024;
   std::future<void> async_result_;
   std::atomic<bool> running_ = {false};
+  double last_pub_time_=0;
 };
 
 CYBER_REGISTER_COMPONENT(CameraComponent)

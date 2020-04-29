@@ -85,4 +85,4 @@
 
 --config_manager_path=./conf
 --start_visualizer=false
---v=5
+--v=3

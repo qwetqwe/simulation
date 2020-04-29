@@ -115,7 +115,9 @@ class Xyitem(object):
         angle = math.degrees(heading) - 90
         carcolor = 'red' if autodriving else 'blue'
         if self.carxyhistidx == -1:
-            self.ax.plot(self.carxhist, self.caryhist, color="blue")
+            #print(self.carxhist)
+            #print(self.caryhist)
+            #self.ax.plot(self.carxhist, self.caryhist, color='blue')
             self.carxyhistidx = len(self.ax.lines) - 1
 
             self.ax.plot(
@@ -153,8 +155,9 @@ class Xyitem(object):
         ycenter = y + math.sin(heading) * 40
         if xcenter >= (self.axx + 20) or xcenter <= (self.axx - 20) or \
                 ycenter >= (self.axy + 20) or ycenter <= (self.axy - 20):
-            scale = self.ax.get_window_extent(
-            )._transform._boxout._bbox.get_points()[1]
+         #   scale = self.ax.get_window_extent(
+         #   )._transform._boxout._bbox.get_points()[1]
+            scale = 1
             original = self.ax.get_position().get_points()
             finalscale = (original[1] - original[0]) * scale
             ratio = finalscale[1] / finalscale[0]

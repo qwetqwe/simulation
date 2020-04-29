@@ -447,7 +447,7 @@ void LonController::ComputeLongitudinalErrors(
   debug->set_station_error(reference_point.path_point().s() - s_matched);
   debug->set_speed_reference(reference_point.v());
   debug->set_current_speed(lon_speed);
-  debug->set_speed_error(reference_point.v() - s_dot_matched);
+  debug->set_speed_error(reference_point.v() -VehicleStateProvider::Instance()->linear_velocity());
   debug->set_acceleration_reference(reference_point.a());
   debug->set_current_acceleration(lon_acceleration);
   debug->set_acceleration_error(reference_point.a() -

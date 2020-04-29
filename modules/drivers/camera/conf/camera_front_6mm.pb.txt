@@ -1,5 +1,5 @@
 
-camera_dev: "/dev/video0"
+camera_dev: "/dev/video2"
 frame_id: "camera_front_6mm"
 pixel_format: "yuyv"
 io_method: IO_METHOD_MMAP
@@ -19,11 +19,11 @@ exposure: 100
 auto_white_balance: true
 white_balance: 4000
 bytes_per_pixel: 2
-trigger_internal: 0
+trigger_internal: 1
 trigger_fps: 20
 channel_name: "/apollo/sensor/camera/front_6mm/image"
 device_wait_ms: 2000
-spin_rate: 200
+spin_rate: 2000
 output_type: RGB
 
 compress_conf {

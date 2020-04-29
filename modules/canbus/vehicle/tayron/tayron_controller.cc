@@ -181,7 +181,7 @@ Chassis TayronController::chassis() {
         static_cast<float>(chassis_.wheel_speed().wheel_spd_fl()+
         chassis_.wheel_speed().wheel_spd_fr()+
         chassis_.wheel_speed().wheel_spd_rl()+
-        chassis_.wheel_speed().wheel_spd_rr())/4.0);
+        chassis_.wheel_speed().wheel_spd_rr())/4.0/3.6);  //km/h->m/s
 
   } else {
     chassis_.set_speed_mps(0);
@@ -218,7 +218,7 @@ Chassis TayronController::chassis() {
       chassis_detail.tayron().steering_report_322().has_steering_angle_status()){
     chassis_.set_steering_percentage(
         static_cast<float>(chassis_detail.tayron().steering_report_322().steering_angle_status() * 100.0 /
-                           vehicle_params_.max_steer_angle()));
+                           490));
   } else {
     chassis_.set_steering_percentage(0);
   }
@@ -447,7 +447,8 @@ void TayronController::Steer(double angle) {
   //const double real_angle = vehicle_params_.max_steer_angle() * angle / 100.0;
   // reverse sign
   /* ADD YOUR OWN CAR CHASSIS OPERATION*/
-  steering_cmd_215_->set_steering_angle_cmd(angle)->set_steering_v_angle_cmd(200);
+  const double real_angle = vehicle_params_.max_steer_angle() * angle / 100.0*180/M_PI;
+  steering_cmd_215_->set_steering_angle_cmd(real_angle)->set_steering_v_angle_cmd(200);
 }
 
 // steering with new angle speed
@@ -460,11 +461,8 @@ void TayronController::Steer(double angle, double angle_spd) {
     return;
   }
   /* ADD YOUR OWN CAR CHASSIS OPERATION*/
- // const double real_angle = vehicle_params_.max_steer_angle() * angle / 100.0;
-  const double real_angle_spd = ProtocolData<::apollo::canbus::ChassisDetail>::BoundedValue(
-      vehicle_params_.min_steer_angle_rate(), vehicle_params_.max_steer_angle_rate(),
-      vehicle_params_.max_steer_angle_rate() * angle_spd / 100.0);
-  steering_cmd_215_->set_steering_angle_cmd(angle)
+  const double real_angle = vehicle_params_.max_steer_angle() * angle / 100.0*180/M_PI;
+  steering_cmd_215_->set_steering_angle_cmd(real_angle)
       ->set_steering_v_angle_cmd(200);
 }
 
@@ -681,7 +679,7 @@ bool TayronController::CheckResponse(const int32_t flags, bool need_wait) {
       is_eps_online = chassis_detail.has_check_response() &&
                       chassis_detail.check_response().has_is_eps_online() &&
                       chassis_detail.check_response().is_eps_online();
-    //  check_ok = check_ok && is_eps_online;
+      check_ok = check_ok && is_eps_online;
     }
 
     if (flags) {

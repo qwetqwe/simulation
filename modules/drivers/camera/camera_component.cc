@@ -105,7 +105,9 @@ void CameraComponent::run() {
     pb_image->set_measurement_time(image_time.ToSecond());
     pb_image->set_data(raw_image_->image, raw_image_->image_size);
     writer_->Write(pb_image);
-
+    AINFO<<"pub period "<<pb_image->mutable_header()->timestamp_sec()-last_pub_time_<<"device: "
+          <<pb_image->mutable_header()->frame_id();
+    last_pub_time_=pb_image->mutable_header()->timestamp_sec();
     cyber::SleepFor(std::chrono::microseconds(spin_rate_));
   }
 }

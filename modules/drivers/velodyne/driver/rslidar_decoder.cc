@@ -73,8 +73,9 @@ namespace robosense
       }
       else
       {
-        this->cut_angle_ = param.cut_angle*100;
+        this->cut_angle_ = -0.01*100;
       }
+      this->cut_angle_ = -0.01*100;
       //distance threshold
       if (param.max_distance > RS_DEFAULT_DISTANCE_MAX || param.max_distance < RS_DEFAULT_DISTANCE_MIN)
       {
@@ -113,7 +114,7 @@ namespace robosense
       this->fov_start_= RS_ANGLE_INT_MAX;
 
       //packet rate
-      int pkt_rate = ceil(RS_V0_POINTS_CHANNEL_PER_SECOND/RS_BLOCKS_CHANNEL_PER_PKT);
+      int pkt_rate = ceil(RS_V1_POINTS_CHANNEL_PER_SECOND/RS_BLOCKS_CHANNEL_PER_PKT);
       if (this->lidar_type_ == RS_Type_Lidar16 && (this->echo_mode_ == RS_Echo_Last || this->echo_mode_ == RS_Echo_Strongest))
       {
         pkt_rate = ceil(pkt_rate/2);
@@ -291,9 +292,9 @@ namespace robosense
         this->fov_end_ = RS_ANGLE_INT_MAX;
       }
       
-//    std::cout<<"[DEBUG] difop lidar type: "<<this->lidar_type_<<", echo mode: "<<this->echo_mode_
-//             <<", npkts: "<<this->pkts_per_frame_<<", rpm: "<<this->rpm_<<", resolution type: "<<this->resolution_type_
-//             <<", intensity mode: "<<this->intensity_type_<< std::endl;
+    AINFO<<"[DEBUG] difop lidar type: "<<this->lidar_type_<<", echo mode: "<<this->echo_mode_
+             <<", npkts: "<<this->pkts_per_frame_<<", rpm: "<<this->rpm_<<", resolution type: "<<this->resolution_type_
+             <<", intensity mode: ";
       //cali data
       if (!(this->calib_init_flag_&0x1)  && (this->lidar_type_ == RS_Type_Lidar16))
       {
@@ -668,7 +669,7 @@ namespace robosense
         {
           this->last_azimuth_ = azimuth;
 
-//          std::cout<<"[RS_decoder][msop][DEBUG] cut angle pkt num: "<<this->packet_counter_<<", size: "<<pointcloud_vec.size()<<std::endl;
+          AINFO<<"[RS_decoder][msop][DEBUG] cut angle pkt num: "<<this->packet_counter_<<", size: "<<pointcloud_vec->point_size();
 
           this->packet_counter_ = 0;
           return RS_Frame_Split;
@@ -679,7 +680,7 @@ namespace robosense
       {
         if (this->packet_counter_ >= this->pkts_per_frame_)
         {
-//          std::cout<<"[RS_decoder][msop][DEBUG] cut pkt num: "<<this->packet_counter_<<", size: "<<pointcloud_vec.size()<<std::endl;
+          AINFO<<"[RS_decoder][msop][DEBUG] cut pkt num: "<<this->packet_counter_<<", size: "<<pointcloud_vec->point_size();
 
           this->packet_counter_ = 0;
           return  RS_Frame_Split;

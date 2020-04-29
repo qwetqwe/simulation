@@ -4,8 +4,8 @@ rpm: 600.0
 model: VLP16
 mode: STRONGEST
 prefix_angle: 18000
-firing_data_port: 3203
-positioning_data_port: 8303
+firing_data_port: 2372
+positioning_data_port: 8312
 use_sensor_sync: false
 max_range: 100.0
 min_range: 0

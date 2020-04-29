@@ -857,10 +857,10 @@ bool UsbCam::read_frame(CameraImagePtr raw_image) {
         if (diff > 0.5 || diff < 0) {
           std::stringstream warning_stream;
           std::string warning_str;
-          warning_stream << "camera time diff exception,diff:" << diff
+          AWARN << "camera time diff exception,diff:" << diff
                          << ";dev:" << config_->camera_dev();
           warning_stream >> warning_str;
-          AWARN << warning_str;
+          //AWARN << warning_str;
         }
       }
       if (len < raw_image->width * raw_image->height) {

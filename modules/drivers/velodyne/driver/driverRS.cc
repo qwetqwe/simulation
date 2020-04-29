@@ -59,8 +59,8 @@ bool RSDriver::RSPoll(const std::shared_ptr<PointCloud>& pc) {
   while (1) {
     int status = -5;
     rslidar_driver::rslidarPacket pkt;
-    rslidar_driver::E_INPUT_STATE ret = this->rsinput_->getPacket(&pkt, 100);
-    AINFO<<"GET PACKET STATE:"<<ret<<"SAMPLEDATA: "<<+pkt.data[0]<<","<<+pkt.data[1]<<" "<<+pkt.data[2];
+    rslidar_driver::E_INPUT_STATE ret = this->rsinput_->getPacket(&pkt, 200);
+    //AINFO<<"GET PACKET STATE:"<<ret<<"SAMPLEDATA: "<<+pkt.data[0]<<","<<+pkt.data[1]<<" "<<+pkt.data[2];
     switch (ret) {
       case rslidar_driver::E_ERROR_INVALID_PARAM:
         AERROR << "[driver] invalid param";

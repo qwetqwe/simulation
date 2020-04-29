@@ -38,7 +38,8 @@ class Interpolation2DTest : public ::testing::Test {
  protected:
   ControlConf control_conf_;
 };
-
+DEFINE_int32(acc, -1.5, "image height");
+DEFINE_int32(vel, 4.4, "image width");
 TEST_F(Interpolation2DTest, normal) {
   Interpolation2D::DataType xyz{std::make_tuple(0.3, 0.2, 0.6),
                                 std::make_tuple(10.1, 15.2, 5.5),
@@ -84,7 +85,7 @@ TEST_F(Interpolation2DTest, calibration_table) {
   }
   Interpolation2D estimator;
   EXPECT_TRUE(estimator.Init(xyz));
-  AINFO<<"LOOKUP -1 2 "<<estimator.Interpolate(std::make_pair(5.5, 40));
+  AINFO<<"LOOKUP -1 2 "<<estimator.Interpolate(std::make_pair(FLAGS_vel, FLAGS_acc));
   for (const auto &elem : xyz) {
     EXPECT_DOUBLE_EQ(std::get<2>(elem),
                      estimator.Interpolate(
