@@ -109,7 +109,7 @@ void SimControl::InitTimerAndIO() {
 
 void SimControl::Init(bool set_start_point, double start_velocity,
                       double start_acceleration) {
-  if (set_start_point && !FLAGS_use_navigation_mode) {
+  if (!FLAGS_use_navigation_mode) {
     InitStartPoint(start_velocity, start_acceleration);
   }
 }
@@ -137,6 +137,8 @@ void SimControl::InitStartPoint(double start_velocity,
     point.mutable_path_point()->set_theta(theta);
     point.set_v(start_velocity);
     point.set_a(start_acceleration);
+    AINFO<<"get start point from map x "<<point.mutable_path_point()->x()<<",y "
+                            <<point.mutable_path_point()->x();
   } else {
     start_point_from_localization_ = true;
     const auto& localization = localization_reader_->GetLatestObserved();
@@ -159,6 +161,8 @@ void SimControl::InitStartPoint(double start_velocity,
     double magnitude = std::hypot(pose.linear_acceleration().x(),
                                   pose.linear_acceleration().y());
     point.set_a(std::signbit(projection) ? -magnitude : magnitude);
+    AINFO<<"get start point from localization x "<<point.mutable_path_point()->x()<<",y "
+                            <<point.mutable_path_point()->x();
   }
   SetStartPoint(point);
 }

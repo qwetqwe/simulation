@@ -24,26 +24,18 @@ void main(void)
 {
     gl_Position = mvp * vec4(vertPos.xyz, 1.0);
 
-    float g = smoothstep(0.0, 256, vertPos.w);
+    float g = smoothstep(0.0, 100, vertPos.w);
     float r = 0.0;
     float b = 0.0;
-
-    if(g <= 0.25)
+    if(g <= 0.5)
     {
-        r = g * 4.0;
-        g = 0.0;
-    }
-    if(g > 0.75)
-    {
-        g = 0.0;
-        b = g * 4.0 - 3.0; // b = g;
+        r = g * 2;
+        g = 1;
     }
     else
     {
-        // g = g + 0.25;
-//        g = g + 0.45;
-        g = g + 0.35;
+        r = 1;
+        g = 1-(g-0.5)*2;
     }
-
     Color = vec3(r,g,b);
 }

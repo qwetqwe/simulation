@@ -749,7 +749,9 @@ function main() {
       ;;
     build)
       set_use_gpu
-      apollo_build_dbg $@
+      #apollo_build_dbg $@
+      DEFINES="${DEFINES} --copt=-fpic"
+      apollo_build_opt $@
       ;;
     build_cpu)
       DEFINES="${DEFINES} --cxxopt=-DCPU_ONLY"

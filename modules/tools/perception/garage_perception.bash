@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-python replay_perception.py garage_*.json
+python /apollo/modules/tools/perception/replay_perception.py /apollo/modules/tools/perception/garage_*.json

@@ -119,7 +119,7 @@ void Velodyne16Parser::Unpack(const VelodynePacket& pkt,
             firing == VLP16_FIRINGS_PER_BLOCK - 1 &&
             dsr == VLP16_SCANS_PER_FIRING - 1) {
           // set header stamp before organize the point cloud
-          pc->set_measurement_time(static_cast<double>(timestamp) / 1e9);
+          pc->set_measurement_time(cyber::Time().Now().ToSecond());
         }
 
         float real_distance = raw_distance.raw_distance * DISTANCE_RESOLUTION;

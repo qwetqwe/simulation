@@ -197,7 +197,7 @@ namespace robosense
       memset(this->curve_rate_, 0, sizeof(this->curve_rate_));
 
       //print infomation
-      std::cout<<"[RS_decoder][param][INFO] init lidar type: "<<((this->lidar_type_==RS_Type_Lidar16)?"RS16":"RS32")
+      AINFO<<"[RS_decoder][param][INFO] init lidar type: "<<((this->lidar_type_==RS_Type_Lidar16)?"RS16":"RS32")
                <<", npkts: "<<this->pkts_per_frame_<<", rpm: "<<this->rpm_<<", max_distance: "<<this->max_distance_threshold_
                <<", min_distance: "<<this->min_distance_threshold_<<", star angle: "<<this->start_angle_<<", end angle: "
                <<this->end_angle_ <<", cut angle: "<<this->cut_angle_;//

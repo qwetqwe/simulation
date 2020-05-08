@@ -1,45 +1,5 @@
 
 ##################################################
-#                   convert                      #
-##################################################
-
-module_config {
-    module_library : "/apollo/bazel-bin/modules/drivers/velodyne/parser/libvelodyne_convert_component.so"
-
-    # 16_front_center
-    components {
-      class_name : "VelodyneConvertComponent"
-      config {
-        name : "velodyne_16_front_center_convert"
-        config_file_path : "/apollo/modules/drivers/velodyne/conf/velodyne16_front_center_conf.pb.txt"
-        readers {
-          channel: "/apollo/sensor/lidar16/front/center/Scan"
-        }
-      }
-    }
-    components {
-      class_name : "VelodyneConvertComponent"
-      config {
-        name : "velodyne_16_rear_left_convert"
-        config_file_path : "/apollo/modules/drivers/velodyne/conf/velodyne16_rear_left_conf.pb.txt"
-        readers {
-          channel: "/apollo/sensor/lidar16/rear/left/Scan"
-        }
-      }
-    }
-    components {
-      class_name : "VelodyneConvertComponent"
-      config {
-        name : "velodyne_16_rear_right_convert"
-        config_file_path : "/apollo/modules/drivers/velodyne/conf/velodyne16_rear_right_conf.pb.txt"
-        readers {
-          channel: "/apollo/sensor/lidar16/rear/right/Scan"
-        }
-      }
-    }
-}
-
-##################################################
 #                    fusion                      #
 ##################################################
 

@@ -26,7 +26,7 @@ limitations under the License.
 #include "modules/canbus/vehicle/tayron/protocol/shift_report_324.h"
 #include "modules/canbus/vehicle/tayron/protocol/steering_report_322.h"
 #include "modules/canbus/vehicle/tayron/protocol/wheel_speed_4a0.h"
-
+#include "modules/canbus/vehicle/tayron/protocol/brake_pressure_6AB.h"
 namespace apollo {
 namespace canbus {
 namespace tayron {
@@ -45,6 +45,7 @@ TayronMessageManager::TayronMessageManager() {
   AddRecvProtocolData<Shiftreport324, true>();
   AddRecvProtocolData<Steeringreport322, true>();
   AddRecvProtocolData<Wheelspeed4a0, true>();
+  AddRecvProtocolData<Brakepressure6AB, true>();
 }
 
 TayronMessageManager::~TayronMessageManager() {}

@@ -17,6 +17,9 @@ proto_library(
 cc_library(
     name = "multi_camera_projection",
     srcs = ["multi_camera_projection.cc"],
+    copts = [
+        '-DMODULE_NAME=\\"perception\\"',
+    ],
     hdrs = ["multi_camera_projection.h"],
     deps = [
         ":pose",
@@ -31,6 +34,9 @@ cc_library(
 cc_library(
     name = "pose",
     srcs = ["pose.cc"],
+    copts = [
+        '-DMODULE_NAME=\\"perception\\"',
+    ],
     hdrs = ["pose.h"],
     deps = [
         "//cyber",
@@ -41,6 +47,9 @@ cc_library(
 cc_library(
     name = "tl_preprocessor",
     srcs = ["tl_preprocessor.cc"],
+    copts = [
+        '-DMODULE_NAME=\\"perception\\"',
+    ],
     hdrs = ["tl_preprocessor.h"],
     deps = [
         ":multi_camera_projection",

@@ -302,23 +302,23 @@ namespace robosense
       memset(this->curve_rate_, 0, sizeof(this->curve_rate_));
 
       //print infomation
-      std::cout<<"[RS_decoder][param][INFO] init lidar type: "<<((this->lidar_type_==RS_Type_Lidar16)?"RS16":"RS32")
+      AINFO<<"[RS_decoder][param][INFO] init lidar type: "<<((this->lidar_type_==RS_Type_Lidar16)?"RS16":"RS32")
                <<", npkts: "<<this->pkts_per_frame_<<", rpm: "<<this->rpm_<<", max_distance: "<<this->max_distance_threshold_
                <<", min_distance: "<<this->min_distance_threshold_<<", star angle: "<<this->start_angle_<<", end angle: "
                <<this->end_angle_ <<", cut angle: "<<this->cut_angle_;//
       switch (this->echo_mode_)
       {
         case RS_Echo_Dual:
-          std::cout<<", echo mode: dual"<<std::endl;
+          AINFO<<", echo mode: dual";
           break;
         case RS_Echo_Strongest:
-          std::cout<<", echo mode: strongest"<<std::endl;
+          AINFO<<", echo mode: strongest";
           break;
         case RS_Echo_Last:
-          std::cout<<", echo mode: last"<<std::endl;
+          AINFO<<", echo mode: last";
           break;
         default:
-          std::cout<<", echo mode: unknow"<<std::endl;
+          AINFO<<", echo mode: unknow";
           break;
       }
     }

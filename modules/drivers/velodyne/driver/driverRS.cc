@@ -60,7 +60,6 @@ bool RSDriver::RSPoll(const std::shared_ptr<PointCloud>& pc) {
     int status = -5;
     rslidar_driver::rslidarPacket pkt;
     rslidar_driver::E_INPUT_STATE ret = this->rsinput_->getPacket(&pkt, 200);
-    //AINFO<<"GET PACKET STATE:"<<ret<<"SAMPLEDATA: "<<+pkt.data[0]<<","<<+pkt.data[1]<<" "<<+pkt.data[2];
     switch (ret) {
       case rslidar_driver::E_ERROR_INVALID_PARAM:
         AERROR << "[driver] invalid param";
@@ -112,9 +111,9 @@ int RSDriver::GeneratePointCloud(rslidar_driver::rslidarPacket pkt,
     // we discard this pointcloud if empty
     AERROR << "All points is NAN! Please check velodyne:" << config_.model();
   } else {
-    pc->set_measurement_time(timestamp);
+    pc->set_measurement_time(pc->mutable_header()->timestamp_sec());
     pc->set_width(pc->point_size()/pc->height());  
-    pc->mutable_header()->set_lidar_timestamp(timestamp);
+    pc->mutable_header()->set_lidar_timestamp(pc->mutable_header()->timestamp_sec());
   }
   return ret;
 }

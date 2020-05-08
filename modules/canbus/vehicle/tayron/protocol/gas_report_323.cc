@@ -51,7 +51,7 @@ double Gasreport323::gas_pedal_status(const std::uint8_t* bytes, int32_t length)
   Byte t0(bytes + 2);
   int32_t x = t0.get_byte(0, 8);
 
-  double ret = x * 0.390000;
+  double ret = x * 0.390000*100;
   return ret;
 }
 
@@ -60,7 +60,7 @@ double Gasreport323::gas_pedal_out_status(const std::uint8_t* bytes, int32_t len
   Byte t0(bytes + 1);
   int32_t x = t0.get_byte(0, 8);
 
-  double ret = x * 0.390000;
+  double ret = x * 0.390000*100;
   return ret;
 }
 

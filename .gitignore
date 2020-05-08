@@ -75,3 +75,4 @@ third_party/
 data/
 apollo_rosbag
 hdmap.html
+debug_output/

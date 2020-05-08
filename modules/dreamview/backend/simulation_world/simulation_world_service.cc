@@ -88,6 +88,7 @@ double CalculateAcceleration(
   // Calculates the dot product of acceleration and velocity. The sign
   // of this projection indicates whether this is acceleration or
   // deceleration.
+  /*
   double projection =
       acceleration.x() * velocity.x() + acceleration.y() * velocity.y();
 
@@ -104,6 +105,8 @@ double CalculateAcceleration(
   }
 
   return magnitude;
+  */
+   return acceleration.y();
 }
 
 Object::DisengageType DeduceDisengageType(const Chassis &chassis) {
@@ -455,7 +458,7 @@ void SimulationWorldService::UpdateSimulationWorld(
 
   // Updates acceleration with the input localization message.
   auto_driving_car->set_speed_acceleration(CalculateAcceleration(
-      pose.linear_acceleration(), pose.linear_velocity(), gear_location_));
+      pose.linear_acceleration_vrf(), pose.linear_velocity(), gear_location_));
 
   // Updates the timestamp with the timestamp inside the localization
   // message header. It is done on both the SimulationWorld object

@@ -30,7 +30,7 @@ from cyber_py import cyber
 from cyber_py import cyber_time
 
 from modules.prediction.proto.prediction_obstacle_pb2 import PredictionObstacles
-from modules.perception.proto.perception_obstacles_pb2 import PerceptionObstacles
+from modules.perception.proto.perception_obstacle_pb2 import PerceptionObstacles
 obstacles_=PerceptionObstacles()
 def receive_perception_obstacles(perception_obstacles):
     obstacles_=perception_obstacles
@@ -39,16 +39,14 @@ def prediction_publisher(prediction_channel, rate):
     cyber.init()
     node = cyber.Node("prediction")
     writer = node.create_writer(prediction_channel, PredictionObstacles)
-   
-        prediction = PredictionObstacles()
-        prediction.header.sequence_num = seq_num
-        prediction.header.timestamp_sec = cyber_time.Time.now().to_sec()
-        prediction.header.module_name = "prediction"
-        int i=0
-        
-        writer.write(prediction)
-        seq_num += 1
-        time.sleep(sleep_time)
+    prediction = PredictionObstacles()
+    prediction.header.sequence_num = seq_num
+    prediction.header.timestamp_sec = cyber_time.Time.now().to_sec()
+    prediction.header.module_name = "prediction"
+    i=0
+    writer.write(prediction)
+    seq_num += 1
+    time.sleep(sleep_time)
 
 
 if __name__ == '__main__':
@@ -61,9 +59,9 @@ if __name__ == '__main__':
     args = parser.parse_args()
     cyber.init()
     node = cyber.Node("prediction")
-    node.create_reader(perception_channel, PerceptionObstacles, receive_perception_obstacles)
-    writer = node.create_writer(prediction_channel, PredictionObstacles)
-    sleep_time = 1.0 / rate
+    node.create_reader("/apollo/perception/obstacles", PerceptionObstacles, receive_perception_obstacles)
+    writer = node.create_writer(args.channel, PredictionObstacles)
+    sleep_time = 1.0 / args.rate
     seq_num = 1
     while not cyber.is_shutdown():
         prediction = PredictionObstacles()

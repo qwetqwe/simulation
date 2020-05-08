@@ -69,6 +69,7 @@ class FakePredictionComponent : public apollo::cyber::TimerComponent {
         std::cin >> ch;
         if (ch == 'c') {
             open_=!open_;
+        std::cout<<"CHANGE STATUS: "<<open_<<std::endl;
         }
         break;
     }
@@ -90,11 +91,19 @@ class FakePredictionComponent : public apollo::cyber::TimerComponent {
     return -1;
   }    
     common::util::FillHeader("fake_prediction", &prediction);
-    //GetKeyBoardColorInput();
+    GetKeyBoardColorInput();
     if (!open_){
+      prediction.clear_prediction_obstacle();
       prediction_writer_->Write(prediction);
       return true;
     }
+    else
+    {
+      prediction_writer_->Write(prediction);
+      return true;
+    }
+    
+/*
     for (int i=0;i<prediction.prediction_obstacle_size();i++)
     {
       v3fs[0]=prediction.prediction_obstacle(i).perception_obstacle().position().x();
@@ -125,6 +134,7 @@ class FakePredictionComponent : public apollo::cyber::TimerComponent {
       polygon_pt->set_z(0);
 
     }
+*/
     prediction_writer_->Write(prediction);
     return true;
   }

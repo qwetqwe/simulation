@@ -30,7 +30,7 @@ query_relative_time: 0.8
 minimum_speed_protection: 0.1
 lat_controller_conf {
   ts: 0.01
-  preview_window: 0
+  preview_window: 20
   cf: 155494.663
   cr: 155494.663
   mass_fl: 520
@@ -38,9 +38,9 @@ lat_controller_conf {
   mass_rl: 520
   mass_rr: 520
   eps: 0.01
-  matrix_q: 0.05
+  matrix_q: 0.1
   matrix_q: 0.0
-  matrix_q: 1.0
+  matrix_q: 0.8
   matrix_q: 0.0
   reverse_matrix_q: 0.05
   reverse_matrix_q: 0.0
@@ -130,7 +130,7 @@ lon_controller_conf {
   station_pid_conf {
     integrator_enable: false
     integrator_saturation_level: 0.3
-    kp: 0.2
+    kp: 0.4
     ki: 0.0
     kd: 0.0
   }

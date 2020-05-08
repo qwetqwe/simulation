@@ -176,8 +176,9 @@ E_INPUT_STATE InputSocket::getPacket(rslidarPacket* pkt, const unsigned int time
   FD_SET(this->difop_fd_, &fds);
 
   int max_fd = std::max(this->msop_fd_, this->difop_fd_);
+  //AINFO<<msop_port_<<" select start "<<tmout.tv_sec;
   int retval = select(max_fd+1, &fds, NULL, NULL, &tmout);
-
+  //AINFO<<msop_port_<<" select end "<<tmout.tv_usec;
   if (retval == -1 && errno == EINTR)
   {
     ret = E_ERROR_SOCKET;
@@ -192,11 +193,15 @@ E_INPUT_STATE InputSocket::getPacket(rslidarPacket* pkt, const unsigned int time
     if (FD_ISSET(this->msop_fd_, &fds))
     {
       n = recvfrom(this->msop_fd_, &(pkt->data[0]), packet_size, 0, NULL, NULL);
+      if (n<0) 
+        AERROR<<"RECV_FROM"<<this->msop_fd_<<"error";
       ret = E_PKT_MSOP;
     }
     else if (FD_ISSET(this->difop_fd_, &fds))
     {
       n = recvfrom(this->difop_fd_, &(pkt->data[0]), packet_size, 0, NULL, NULL);
+      if (n<0) 
+        AERROR<<"RECV_FROM"<<this->difop_fd_<<"error";
       ret = E_PKT_DIFOP;
     }
     else

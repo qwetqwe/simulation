@@ -40,7 +40,7 @@ int main(int argc, char* argv[]) {
     minor = static_cast<int>(version * 10.0 - major * 10);
     if (major < 3 && minor < 3) {
       std::cout << "Shading Language Version ( " << version
-                << ") is much lower than 3.3" << std::endl;
+                << ") is much lower than  3.3" << std::endl;
       return -1;
     }
   }

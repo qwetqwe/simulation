@@ -30,7 +30,7 @@ lat_controller_conf {
   mass_rl: 450
   mass_rr: 450
   eps: 0.01
-  matrix_q: 0.01
+  matrix_q: 0.02
   matrix_q: 0.0
   matrix_q: 0.01
   matrix_q: 0.0
@@ -49,19 +49,19 @@ lat_controller_conf {
     }
     scheduler {
       speed: 8.0
-      ratio: 0.6
+      ratio: 1
     }
     scheduler {
       speed: 12.0
-      ratio: 0.2
+      ratio: 1
     }
     scheduler {
       speed: 20.0
-      ratio: 0.1
+      ratio: 1
     }
     scheduler {
       speed: 25.0
-      ratio: 0.05
+      ratio: 1
     }
   }
   heading_err_gain_scheduler {
@@ -92,9 +92,9 @@ lat_controller_conf {
     beta: 1.0
     tau: 0.0
   }
-  enable_reverse_leadlag_compensation: true
+  enable_reverse_leadlag_compensation: false
   enable_look_ahead_back_control: true
-  lookahead_station: 1.4224
+  lookahead_station: 0.5
   lookback_station: 2.8448
 }
 lon_controller_conf {
@@ -103,26 +103,26 @@ lon_controller_conf {
   throttle_minimum_action: 18.0
   speed_controller_input_limit: 10
   station_error_limit: 5.0
-  preview_window: 20.0
+  preview_window: 10
   standstill_acceleration: -0.3
   station_pid_conf {
     integrator_enable: false
     integrator_saturation_level: 0.3
-    kp: 0.3
+    kp: 0.6
     ki: 0.0
     kd: 0.0
   }
   low_speed_pid_conf {
     integrator_enable: true
     integrator_saturation_level: 0.3
-    kp: 0.3
+    kp: 0.5
     ki: 0.0
     kd: 0.0
   }
   high_speed_pid_conf {
     integrator_enable: true
     integrator_saturation_level: 0.3
-    kp: 0.3
+    kp: 0.5
     ki: 0.0
     kd: 0.0
   }

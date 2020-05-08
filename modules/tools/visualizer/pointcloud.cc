@@ -43,7 +43,7 @@ bool PointCloud::FillVertexBuffer(GLfloat* pBuffer) {
     return false;
   }
 }
-
+ 
 bool PointCloud::FillData(
     const std::shared_ptr<const apollo::drivers::PointCloud>& pdata) {
   assert(vertex_count() == pdata->point_size());

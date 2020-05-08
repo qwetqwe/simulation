@@ -56,7 +56,7 @@
 # novatel to world frame id.
 # type: string
 # default:
---obs_novatel2world_tf2_frame_id=localization
+--obs_novatel2world_tf2_frame_id=world
 
 # novatel to world child frame id.
 # type: string
@@ -84,5 +84,5 @@
 --obs_max_local_pose_extrapolation_latency=0.15
 
 --config_manager_path=./conf
---start_visualizer=false
+--start_visualizer=true
 --v=3

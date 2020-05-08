@@ -6,8 +6,8 @@ transform:
     z: -0.00471662
     w: 0.999957
   translation:
-    x: 1.814
-    y: -1.24763
+    x: 0
+    y: 0
     z: -0.756992
 header:
   seq: 0

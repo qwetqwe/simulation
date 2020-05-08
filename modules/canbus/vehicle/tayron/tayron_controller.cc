@@ -198,13 +198,14 @@ Chassis TayronController::chassis() {
   // 9
 
   if (chassis_detail.has_tayron() && chassis_detail.tayron().has_brake_report_321() &&
-      chassis_detail.tayron().brake_report_321().has_pedal_travel()) {
-    chassis_.set_brake_percentage(
-        static_cast<float>(chassis_detail.tayron().brake_report_321().pedal_travel()/100));
+      chassis_detail.tayron().brake_report_321().has_brake_control_status()) {
     chassis_.set_brake_status(chassis_detail.tayron().brake_report_321().brake_control_status());
-  } else {
-    chassis_.set_brake_percentage(0);
-  }
+  } 
+  if (chassis_detail.has_tayron() && chassis_detail.tayron().has_brake_report_321() &&
+      chassis_detail.tayron().brake_report_321().has_pu_pressure()) {
+    chassis_.set_brake_percentage(
+        static_cast<float>(chassis_detail.tayron().brake_report_321().pu_pressure()));
+  } 
   // 23, previously 10
   if (chassis_detail.has_gear() && chassis_detail.gear().has_gear_state()) {
     chassis_.set_gear_location(chassis_detail.gear().gear_state());

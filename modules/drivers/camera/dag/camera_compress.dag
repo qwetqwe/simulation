@@ -5,10 +5,21 @@ module_config {
     components {
       class_name : "CompressComponent"
       config {
+        name : "camera_front_4mm_compress"
+        config_file_path : "/apollo/modules/drivers/camera/conf/camera_front_4mm.pb.txt"
+        readers {
+          channel: "/apollo/sensor/camera/front_4mm/image"
+          pending_queue_size: 10
+        }
+      }
+    }
+    components {
+      class_name : "CompressComponent"
+      config {
         name : "camera_front_6mm_compress"
         config_file_path : "/apollo/modules/drivers/camera/conf/camera_front_6mm.pb.txt"
         readers {
-          channel: "/apollo/sensor/camera/traffic/image_short"
+          channel: "/apollo/sensor/camera/front_6mm/image"
           pending_queue_size: 10
         }
       }
@@ -19,7 +30,7 @@ module_config {
         name : "camera_front_12mm_compress"
         config_file_path : "/apollo/modules/drivers/camera/conf/camera_front_12mm.pb.txt"
         readers {
-          channel: "/apollo/sensor/camera/traffic/image_long"
+          channel: "/apollo/sensor/camera/front_12mm/image"
           pending_queue_size: 10
         }
       }

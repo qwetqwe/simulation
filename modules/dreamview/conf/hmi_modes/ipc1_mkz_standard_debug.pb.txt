@@ -24,15 +24,15 @@ cyber_modules {
   }
 }
 cyber_modules {
-  key: "Localization"
+  key: "Daoyuan"
   value: {
-    dag_files: "/apollo/modules/localization/dag/dag_streaming_rtk_localization.dag"
+    dag_files: "/apollo/modules/drivers/daoyuan/dag/daoyuan.dag"
   }
 }
 cyber_modules {
   key: "Perception"
   value: {
-    dag_files: "/apollo/modules/perception/production/dag/dag_streaming_perception.dag"
+    dag_files: "/apollo/modules/perception/production/dag/dag_streaming_perception_lidar.dag"
   }
 }
 cyber_modules {
@@ -63,6 +63,12 @@ cyber_modules {
   key: "Velodyne"
   value: {
     dag_files: "/apollo/modules/drivers/velodyne/dag/velodyne.dag"
+  }
+}
+cyber_modules {
+  key: "Robosense"
+  value: {
+    dag_files: "/apollo/modules/drivers/velodyne/dag/robosense_fusion.dag"
   }
 }
 modules {
@@ -97,16 +103,16 @@ monitored_components {
     }
   }
 }
-monitored_components {
-  key: "GPS"
-  value: {
-    process {
-      command_keywords: "mainboard"
-      command_keywords: "/apollo/modules/drivers/gnss/dag/gnss.dag"
-    }
-    # We also have a special GPSMonitor to check message status.
-  }
-}
+#monitored_components {
+#  key: "GPS"
+#  value: {
+#    process {
+#      command_keywords: "mainboard"
+#      command_keywords: "/apollo/modules/drivers/gnss/dag/gnss.dag"
+#    }
+#    # We also have a special GPSMonitor to check message status.
+#  }
+#}
 monitored_components {
   key: "Localization"
   value: {
@@ -120,11 +126,11 @@ monitored_components {
 #     # Special EsdCanMonitor.
 #   }
 # }
-monitored_components {
-  key: "Lidar 128"
-  value: {
-    channel {
-      name: "/apollo/sensor/lidar128/compensator/PointCloud2"
-    }
-  }
-}
+#monitored_components {
+#  key: "Lidar 128"
+#  value: {
+#    channel {
+#      name: "/apollo/sensor/lidar128/compensator/PointCloud2"
+#    }
+#  }
+#}

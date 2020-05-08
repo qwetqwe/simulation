@@ -32,7 +32,7 @@ const int32_t Brakereport321::ID = 0x321;
 
 void Brakereport321::Parse(const std::uint8_t* bytes, int32_t length,
                          ChassisDetail* chassis) const {
-  chassis->mutable_tayron()->mutable_brake_report_321()->set_pu_pressure(pu_pressure(bytes, length));
+//  chassis->mutable_tayron()->mutable_brake_report_321()->set_pu_pressure(pu_pressure(bytes, length));
   chassis->mutable_tayron()->mutable_brake_report_321()->set_pedal_travel(pedal_travel(bytes, length));
   chassis->mutable_brake()->set_brake_output(pedal_travel(bytes, length));
   chassis->mutable_tayron()->mutable_brake_report_321()->set_brake_pedal_status(brake_pedal_status(bytes, length));

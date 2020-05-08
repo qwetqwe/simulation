@@ -4,6 +4,9 @@ package(default_visibility = ["//visibility:public"])
 
 cc_library(
     name = "visualizer",
+    copts = [
+        '-DMODULE_NAME=\\"perception\\"',
+    ],
     srcs = ["visualizer.cc"],
     hdrs = [
         "colormap.h",
